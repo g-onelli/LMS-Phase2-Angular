@@ -1,15 +1,5 @@
 
 <div class = 'leftSection'>
-    <div class = 'availableBooks'>
-        <app-availablebooks> </app-availablebooks>
-    </div>
-
-    <br />
-
-    <div class = 'availableVideos'>
-        <app-availablevideos> </app-availablevideos>
-    </div>
-
     <br />
 
     <div class = 'check-out-item'>
@@ -41,16 +31,6 @@
 
 
 <div class = rightSection>
-    <div class = 'checkedOutBooks'>
-        <app-checkedoutbook> </app-checkedoutbook>
-    </div>
-
-    <br />
-
-    <div class = 'checkedOutVideos'>
-        <app-checkedoutvideo> </app-checkedoutvideo>
-    </div>
-
     <br />
 
     <div class = 'check-in-item'>
@@ -79,5 +59,117 @@
     <br />
 </div>
 
+<div id="conteudo-secao">
+    
+        <table class="conteudo-secao-boxes">
+            <tbody>
+                <tr class="conteudo-secao-boxes__line">
+                    <td class="conteudo-secao-boxes__col">
+                        <div class="conteudo-secao-box">
+                            <div class="topo-secao">
+                                <div class="topo-secao__inner">
+                                    <span class="topo-secao__txt">Available Books</span>
+                                </div>
+                            </div>
+                            <div class="body-secao">
+                                <div class="box-listagem__padding">
+                                    <div class="available-books-list">
+                                        <div class="box-listagem__item">
+                                            <div class="box-listagem__inner">
+                                                <div class="box_listagem__field">
+                                                    <app-availablebooks></app-availablebooks>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr class="conteudo-secao-boxes__line">
+                    <td class="conteudo-secao-boxes__col">
+                        <div class="conteudo-secao-box">
+                            <div class="topo-secao">
+                                <div class="topo-secao__inner">
+                                    <span class="topo-secao__txt">Available Videos</span>
+                                </div>
+                            </div>
+                            <div class="body-secao">
+                                <div class="box-listagem__padding">
+                                    <div class="available-videos-list">
+                                        <div class="box-listagem__item">
+                                            <div class="box-listagem__inner">
+                                                <div class="box_listagem__field">
+                                                    <app-availablevideos></app-availablevideos>
+                                            </div>
+                                        </div>
+                                    </div>
+                                 </div>
+                             </div>
+                        </div>
+                     </div>
+                 </td>
+             </tr>
+         </tbody>
+     </table>
+</div>
+
+<div id="conteudo-secao">
+    
+    <table class="conteudo-secao-boxes push-right">
+        <tbody>
+            <tr class="conteudo-secao-boxes__line">
+                <td class="conteudo-secao-boxes__col">
+                    <div class="conteudo-secao-box">
+                        <div class="topo-secao">
+                            <div class="topo-secao__inner">
+                                <span class="topo-secao__txt">Checked Out Books</span>
+                            </div>
+                        </div>
+                        <div class="body-secao">
+                            <div class="box-listagem__padding">
+                                <div class="checked-out-books-list">
+                                    <div class="box-listagem__item">
+                                        <div class="box-listagem__inner">
+                                            <div class="box_listagem__field">
+                                                <app-checkedoutbook></app-checkedoutbook>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr class="conteudo-secao-boxes__line">
+                <td class="conteudo-secao-boxes__col">
+                    <div class="conteudo-secao-box">
+                        <div class="topo-secao">
+                            <div class="topo-secao__inner">
+                                <span class="topo-secao__txt">Checked Out Videos</span>
+                            </div>
+                        </div>
+                        <div class="body-secao">
+                            <div class="box-listagem__padding">
+                                <div class="checked-out-videos-list">
+                                    <div class="box-listagem__item">
+                                        <div class="box-listagem__inner">
+                                            <div class="box_listagem__field">
+                                                <app-checkedoutvideo></app-checkedoutvideo>
+                                        </div>
+                                    </div>
+                                </div>
+                             </div>
+                         </div>
+                    </div>
+                 </div>
+             </td>
+         </tr>
+     </tbody>
+ </table>
+</div>
 
 
+    

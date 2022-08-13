@@ -10,7 +10,7 @@
                                 <div class="topo-secao__inner">
                                     <a class="checkbox checkbox-select-itens push-left" href="#"><i
                                             class="fa fa-check"></i></a>
-                                    <span class="topo-secao__txt">Your Fees</span>
+                                    <span class="topo-secao__txt">Your Fees - Current Balance: ${{balance}}</span>
                                 </div>
                             </div>
                             <div class="body-secao">
@@ -18,7 +18,7 @@
                                     <div class="fee-list">
                                         <div class="box-listagem__item" *ngFor="let f of fees, let i = index">
                                             <div class="box-listagem__inner">
-                                                <div class="box_listagem__field">
+                                                <div class="box_listagem__field" *ngIf="!emptyFee">
                                                     Patron: <strong>{{f.patronName}}</strong>&nbsp;
                                                     Type: {{f.feeType}}&nbsp;
                                                     Amount: ${{f.total}}&nbsp;

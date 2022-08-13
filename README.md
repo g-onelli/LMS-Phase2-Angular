@@ -11,6 +11,7 @@
 
 ### Gavin
 - Login/Signup/Reset Password
+- Profile
 
 #### Patron
 - Request a Book

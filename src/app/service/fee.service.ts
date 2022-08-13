@@ -11,6 +11,7 @@ export class FeeService {
 
   postFeeApi: string;
   getFeesApi: string;
+  getFeesByPatronIdApi: string;
   updateFeeApi: string;
 
   fee$ = new BehaviorSubject<FeeModel[]>([]);
@@ -19,6 +20,7 @@ export class FeeService {
     this.postFeeApi = environment.serverUrl + '/fee';
     this.getFeesApi = environment.serverUrl + '/fee/patron';
     this.updateFeeApi = environment.serverUrl + '/fee/';
+    this.getFeesByPatronIdApi = environment.serverUrl + '/fee/';
   }
 
   postFee() {
@@ -48,6 +50,16 @@ export class FeeService {
     return this.http.put<FeeModel>(this.updateFeeApi + fee.id, fee, httpOptions);
   }
 
+getFeeByPatron(patronId: number) : Observable<FeeModel[]> {
+    let encodedCredentials= localStorage.getItem('credentials');
+    let httpOptions = {
+      headers: new HttpHeaders({
+        'Content-type': 'application/json',
+        'Authorization': 'basic ' + encodedCredentials
+      })
+    };
+    return this.http.get<FeeModel[]>(this.getFeesByPatronIdApi + patronId, httpOptions);
+  }
   getAllFees() : Observable<FeeModel[]> {
     let encodedCredentials= localStorage.getItem('credentials');
     let httpOptions = {

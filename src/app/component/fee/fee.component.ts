@@ -10,13 +10,22 @@ import { FeeService } from 'src/app/service/fee.service';
 export class FeeComponent implements OnInit {
 
   fees: FeeModel[];
+  emptyFee: boolean;
+  balance: number;
 
   constructor(private feeService: FeeService) { }
 
   ngOnInit(): void {
+    this.emptyFee = false;
     this.feeService.getFees().subscribe({
       next: (data) => {
-        this.fees = data;
+        if(data[0].id != null) {
+          this.fees = data;
+          this.balance = data[0].patronBalance;
+        } else {
+          this.emptyFee = true;
+          this.balance = data[0].patronBalance;
+        }
         this.feeService.fee$.next(this.fees);
       },
       error: (e) => {

@@ -11,7 +11,7 @@ import { PatronComponent } from '../patron/patron.component';
 @Component({
   selector: 'app-checkedout',
   templateUrl: './checkedout.component.html',
-  styleUrls: ['./checkedout.component.css']
+  styleUrls: ['./checkedout.component.less']
 })
 
 

@@ -5,5 +5,6 @@ export class FeeModel {
     datePaid: string;
     feeType: string;
     total: number;
-    patronName: string;
+    patronName?: string;
+    patronBalance?: number;
 }
