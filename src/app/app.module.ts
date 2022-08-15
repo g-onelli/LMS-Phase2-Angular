@@ -44,6 +44,13 @@ import { LibfeeComponent } from './component/libfee/libfee.component';
 import { LibroomComponent } from './component/libroom/libroom.component';
 import { ProfileComponent } from './auth/component/profile/profile.component';
 import { ProfileBoxComponent } from './auth/component/profile-box/profile-box.component';
+import { ChartComponent } from './component/libdashboard/chart/chart.component';
+import {ChartModule} from 'primeng/chart';
+import {CardModule} from 'primeng/card';
+import { AppConfigService } from './service/app-config.service';
+import { CardComponent } from './component/libdashboard/card/card.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {SplitterModule} from 'primeng/splitter';
 
 
 @NgModule({
@@ -88,15 +95,21 @@ import { ProfileBoxComponent } from './auth/component/profile-box/profile-box.co
     LibroomComponent,
     ProfileComponent,
     ProfileBoxComponent,
+    ChartComponent,
+    CardComponent,
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule, 
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    ChartModule,
+    CardModule,
+    SplitterModule
   ],
-  providers: [],
+  providers: [AppConfigService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

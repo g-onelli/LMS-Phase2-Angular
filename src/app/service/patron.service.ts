@@ -46,6 +46,16 @@ export class PatronService {
     };
     return this.http.get<Patron[]>(this.getAllApi + '?page=' +page+ '&size='+size,httpOptions);
   }
+  getPatrons():Observable<Patron[]>{
+    let encodedCredentials= localStorage.getItem('credentials');
+    let httpOptions = {
+      headers: new HttpHeaders({
+        'Content-type': 'application/json',
+        'Authorization': 'basic ' + encodedCredentials
+      })
+    };
+    return this.http.get<Patron[]>(this.getAllApi + '/all',httpOptions);
+  }
   public deletePatron(id: number):Observable<Patron>{
     let encodedCredentials= localStorage.getItem('credentials');
     let httpOptions = {

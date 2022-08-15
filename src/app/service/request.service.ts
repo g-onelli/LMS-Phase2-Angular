@@ -45,6 +45,16 @@ export class RequestService {
     };
     return this.http.get<Requests[]>(this.getAllApi + '?page=' +page+ '&size='+size,httpOptions);
   }
+  getRequests():Observable<Requests[]>{
+    let encodedCredentials= localStorage.getItem('credentials');
+    let httpOptions = {
+      headers: new HttpHeaders({
+        'Content-type': 'application/json',
+        'Authorization': 'basic ' + encodedCredentials
+      })
+    };
+    return this.http.get<Requests[]>(this.getAllApi + '/all',httpOptions);
+  }
   public deleteRequest(id: number):Observable<Requests>{
     let encodedCredentials= localStorage.getItem('credentials');
     let httpOptions = {

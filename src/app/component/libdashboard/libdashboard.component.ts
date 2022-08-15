@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 
+
 @Component({
   selector: 'app-libdashboard',
   templateUrl: './libdashboard.component.html',
-  styleUrls: ['./libdashboard.component.css']
+  styleUrls: ['./libdashboard.component.less']
 })
 export class LibdashboardComponent implements OnInit {
   

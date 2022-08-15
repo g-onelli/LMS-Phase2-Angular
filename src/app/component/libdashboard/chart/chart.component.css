@@ -1,0 +1,11 @@
+.box-listagem__item{
+    
+    position: relative;
+}
+.float-chart{
+    float: left;
+
+}
+.piechart{
+    float: left;
+}

@@ -81,5 +81,14 @@ export class EventService {
     };
     return this.http.put<EventModel>(this.updateByIdApi + '/' + id, event, httpOptions);
   }
-
+  getEvents() : Observable<EventModel[]> {
+    let encodedCredentials= localStorage.getItem('credentials');
+    let httpOptions = {
+      headers: new HttpHeaders({
+        'Content-type': 'application/json',
+        'Authorization': 'basic ' + encodedCredentials
+      })
+    };
+    return this.http.get<EventModel[]>(this.getAllApi + '/all', httpOptions);
+  }
 }

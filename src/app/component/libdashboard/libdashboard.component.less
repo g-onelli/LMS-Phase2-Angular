@@ -1,21 +1,25 @@
 /*
     Tripoli is a generic CSS standard for HTML rendering.
     Copyright (C) 2007  David Hellsing
+
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
     the Free Software Foundation, either version 3 of the License, or
     (at your option) any later version.
+
     This program is distributed in the hope that it will be useful,
     but WITHOUT ANY WARRANTY; without even the implied warranty of
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU General Public License for more details.
+
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
+
 * { margin: 0; padding: 0; text-decoration: none; font-size: 1em; outline: none; }
 code, kbd, samp, pre, tt, var, textarea, input, select, isindex, listing, xmp, plaintext { font: inherit; font-size: 1em;}
 dfn, i, cite, var, address, em { font-style: normal; }
-th, b, strong, h1, h2, h3, h4, h5, h6 { font-weight: normal; }
+th, b, strong, h1, h2, h3, h4, h5, h6 { font-weight: bold; }
 a, img, a img, iframe, form, fieldset, abbr, acronym, object, applet, table { border: none; }
 table { border-collapse: collapse; border-spacing: 0; }
 caption, th, td, center { text-align: left; vertical-align: top; }
@@ -31,7 +35,6 @@ blink { text-decoration: none; }
 nobr { white-space: normal; }
 
 /*
-
 
 CHANGELOG
 
@@ -91,7 +94,7 @@ Disabled the deprecated <marquee>, <blink> and <nobr> tag in some browsers
 
 @color_main: #003e35;
 
-@menuWidth: 210px;
+@menuWidth: 30px;
 
 @color1: #4e8ce5;
 @color2: #949292;
@@ -635,6 +638,7 @@ input[type=range]::-ms-thumb {
     margin-left: 25px;
     font-size: 12px;
     display: block;
+    
   }
 
   .menu-item__icon{
@@ -685,12 +689,12 @@ input[type=range]::-ms-thumb {
 #conteudo-secao{
   position: absolute;
   width: 100%;
-  left: 10px;
-  top: 20px;
+  left: 0;
+  top: 0;
   height: 100%;
 
   .conteudo-secao-inner{
-    margin: 0 10px 0 @menuWidth;
+    margin: 0 30px 0 @menuWidth;
     position: relative;
     height: 100%;
   }
@@ -780,6 +784,7 @@ input[type=range]::-ms-thumb {
   .topo-secao__inner{
     padding: 15px 10px;
     font-weight: 300;
+    font-weight: bold;
   }
 
   .button-sm-with-icon{
@@ -913,6 +918,7 @@ input[type=range]::-ms-thumb {
   height: 100%;
   overflow: hidden;
   overflow-y: scroll;
+  
   top: 0;
   left: 0;
 }
@@ -954,12 +960,13 @@ input[type=range]::-ms-thumb {
 }
 
 .box-listagem__item:nth-child(odd) {
-  background-color: @color5;
+  //background-color: @color5;
 }
 
 .box-listagem__inner{
   padding: 0 40px 0 10px;
   display: block;
+  position: absolute;
 }
 
 .box-listagem__field{
