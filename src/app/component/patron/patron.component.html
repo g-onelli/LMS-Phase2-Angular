@@ -19,10 +19,10 @@
         <app-patron-list> </app-patron-list>
     </div>
     <div class="patron-add">
-        <app-patron-add> </app-patron-add>
+        <app-patron-add (putPatronEmitter)="onPatronPut($event)"> </app-patron-add>
     </div>
     <div class="patron-delete">
-        <app-patron-delete> </app-patron-delete>
+        <app-patron-delete (deletePatronEmitter)="onPatronDelete($event)"> </app-patron-delete>
     </div>
 </div>
 </div>

@@ -1,4 +1,6 @@
 .box-listagem__item{
     text-align:center;
     position: relative;
+    float:left;
+
 }
