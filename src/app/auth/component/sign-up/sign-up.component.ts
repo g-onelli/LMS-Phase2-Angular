@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { PatronSignupDto } from '../../model/user.model';
 import { AuthService } from '../../service/auth.service';
 
@@ -9,10 +10,11 @@ import { AuthService } from '../../service/auth.service';
   templateUrl: './sign-up.component.html',
   styleUrls: ['./sign-up.component.scss']
 })
-export class SignUpComponent implements OnInit {
+export class SignUpComponent implements OnInit,OnDestroy {
 
   signUpForm: FormGroup;
   patronDto: PatronSignupDto;
+  subscriptions: Subscription[]=[];
   constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit(): void {
@@ -31,6 +33,7 @@ export class SignUpComponent implements OnInit {
       securityAnswer: this.signUpForm.value.securityAnswer,
       encodedCredentials: btoa(this.signUpForm.value.username + '@%' + this.signUpForm.value.password)
     };
+    this.subscriptions.push(
     this.authService.signUp(this.patronDto).subscribe({
       next: (data)=> {
         this.authService.message$.next('Sign Up Successful: Please Login');
@@ -39,7 +42,10 @@ export class SignUpComponent implements OnInit {
       error: (e)=>{
 
       }
-    });
+    })
+    );
    }
-
+   ngOnDestroy(): void {
+    this.subscriptions.forEach(sub=>sub.unsubscribe());
+  }
 }

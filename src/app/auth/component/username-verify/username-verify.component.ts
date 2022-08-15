@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { UserResetDto } from '../../model/user.model';
 import { AuthService } from '../../service/auth.service';
 
@@ -8,7 +9,7 @@ import { AuthService } from '../../service/auth.service';
   templateUrl: './username-verify.component.html',
   styleUrls: ['./username-verify.component.scss']
 })
-export class UsernameVerifyComponent implements OnInit {
+export class UsernameVerifyComponent implements OnInit,OnDestroy {
 
   username: string;
   error_msg: string;
@@ -16,6 +17,7 @@ export class UsernameVerifyComponent implements OnInit {
   status: boolean;
   answer: string;
   showSecurityBox: boolean;
+  subscriptions: Subscription[]=[];
   constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit(): void {
@@ -24,7 +26,8 @@ export class UsernameVerifyComponent implements OnInit {
     this.showSecurityBox=false;
   }
   onSubmit(){
-    // call the apie and pass username
+    // call the api and pass username
+    this.subscriptions.push(
     this.authService.getUserSecurityDetailsByUsername(this.username).subscribe({
       next: (data)=>{
         this.dto = data;
@@ -35,8 +38,10 @@ export class UsernameVerifyComponent implements OnInit {
         this.error_msg='Username Invalid'
       }
     })
+    );
   }
   onQuestionSubmit(){
+    this.subscriptions.push(
     this.authService.validateSecurityAnswer(this.username, this.answer).subscribe({
       next: (data)=>{
         if(data === true){
@@ -51,6 +56,10 @@ export class UsernameVerifyComponent implements OnInit {
       error: (e)=>{
 
       }
-    });
+    })
+    );
+  }
+  ngOnDestroy(): void {
+    this.subscriptions.forEach(sub=>sub.unsubscribe());
   }
 }
