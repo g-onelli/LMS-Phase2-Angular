@@ -1,4 +1,4 @@
-<button (click)="showAllRooms()"></button>
+<!--<button (click)="showAllRooms()"></button>-->
 
 <br>
 <br>
@@ -11,3 +11,19 @@
         Number of Presentation Tools: {{r.hasPresenterTools}}
     </div>
 </div>
+<br>
+<form (submit)="showSingleRoom()" [formGroup]="showOneRoomForm">
+    <label>Room Number</label>
+    <input type="text" name="rNum" formControlName="rNum">
+    <input type="submit" value="show reservation">
+</form>
+<br>
+<br>
+<div *ngIf="room!=null">
+        Room: {{room.roomNumber}}
+        &nbsp;
+        Accomodation Capacity: {{room.capacity}}
+        &nbsp;
+        Number of Presentation Tools: {{room.hasPresenterTools}}
+</div>
+<br>
