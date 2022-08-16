@@ -27,8 +27,8 @@ export class ProfileComponent implements OnInit,OnDestroy {
       username: new FormControl({value:this.username, disabled: true}),
       cardexpirationdate: new FormControl({value: '', disabled: true},),
       uid: new FormControl({value: '', disabled: true},),
-      securityQuestion: new FormControl('', [Validators.required,Validators.pattern(/^[\w\-\s]+$/)]),
-      securityAnswer: new FormControl('', [Validators.required,Validators.pattern(/^[\w\-\s]+$/)])
+      securityQuestion: new FormControl('', [Validators.required,Validators.pattern(/^[-@.?,\/#&+\w\s]*$/)]),
+      securityAnswer: new FormControl('', [Validators.required,Validators.pattern(/^[-@.?,\/#&+\w\s]*$/)])
     });
     this.credentials = localStorage.getItem('credentials');
     this.subscriptions.push(

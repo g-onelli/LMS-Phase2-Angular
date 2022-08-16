@@ -5,6 +5,7 @@ import { AppConfigService } from 'src/app/service/app-config.service';
 import { AvailableBooksService } from 'src/app/service/availablebooks.service';
 import { AvailableVideosService } from 'src/app/service/availablevideos.service';
 import { BookService } from 'src/app/service/book.service';
+import { RoomService } from 'src/app/service/room.service';
 import { VideoService } from 'src/app/service/video.service';
 
 
@@ -26,6 +27,7 @@ export class ChartComponent implements OnInit, OnDestroy {
   numPatrons: number;
   numBookRequests: number;
   totalFees: number;
+  numRooms: number;
   reservedRooms: number;
   numEvents: number;
   config: AppConfig;
@@ -35,7 +37,7 @@ export class ChartComponent implements OnInit, OnDestroy {
   horizontalOptions: any;
   basicOptions: any;
 
-  constructor(private configService: AppConfigService, private bookService: BookService,private videoService: VideoService,private availableVideosService: AvailableVideosService,private availableBooksService: AvailableBooksService) { }
+  constructor(private configService: AppConfigService, private bookService: BookService,private videoService: VideoService,private availableVideosService: AvailableVideosService,private availableBooksService: AvailableBooksService,private roomService: RoomService) { }
   
 
   ngOnInit(): void {
@@ -84,77 +86,91 @@ export class ChartComponent implements OnInit, OnDestroy {
       }
 
     });
-    this.bookService.fetchAllBooks().subscribe({
-      next: (data)=>{
-        this.numBooks = data.length;
-        this.videoService.fetchVideos().subscribe({
-          next: (data)=>{
-            this.numVideos = data.length;
-            this.availableVideosService.fetchAvailableVideos().subscribe({
-              next: (data)=>{
-                this.numAvailableVideos = data.length;
-                this.availableBooksService.fetchAvailableBooks().subscribe({
-                  next: (data)=>{
-                    this.numAvailableBooks = data.length;
-                    this.numAvailableBooks = (this.numBooks-this.numAvailableBooks);
-                    this.numAvailableVideos =(this.numVideos-this.numAvailableVideos);
-                    this.stackedData = {
-                      labels: ['Books', 'Videos', 'Rooms'],
-                      datasets: [{
-                          type: 'bar',
-                          label: 'Total',
-                          backgroundColor: '#42A5F5',
-                          data: [
-                            this.numBooks,
-                            this.numVideos
-                          ]
-                      }, {
-                          type: 'bar',
-                          label: 'Checked Out',
-                          backgroundColor: '#FFA726',
-                          data: [
-                            this.numAvailableBooks,
-                            this.numAvailableVideos
-                          ]
-                      },]
-                  };
-          
-                  this.stackedOptions = {
-                      tooltips: {
-                          mode: 'index',
-                          intersect: false
-                      },
-                      responsive: true,
-                      scales: {
-                          xAxes: [{
-                              stacked: true,
-                          }],
-                          yAxes: [{
-                              stacked: true
-                          }]
-                      }
-                  };
-          
-                  this.config = this.configService.config;
-                  this.updateChartOptions();
-                  this.subscription = this.configService.configUpdate$.subscribe(config => {
-                      this.config = config;
-                      this.updateChartOptions();
-                  });
-                  }
-            
-                });
-              }
-        
+    this.roomService.showAllReservations().subscribe({
+        next: (data)=>{
+            this.reservedRooms =data.length;
+            this.roomService.showAllRooms().subscribe({
+                next: (data)=>{
+                    this.numRooms = data.length;
+                    this.bookService.fetchAllBooks().subscribe({
+                        next: (data)=>{
+                          this.numBooks = data.length;
+                          this.videoService.fetchVideos().subscribe({
+                            next: (data)=>{
+                              this.numVideos = data.length;
+                              this.availableVideosService.fetchAvailableVideos().subscribe({
+                                next: (data)=>{
+                                  this.numAvailableVideos = data.length;
+                                  this.availableBooksService.fetchAvailableBooks().subscribe({
+                                    next: (data)=>{
+                                      this.numAvailableBooks = data.length;
+                                      this.numAvailableBooks = (this.numBooks-this.numAvailableBooks);
+                                      this.numAvailableVideos =(this.numVideos-this.numAvailableVideos);
+                                      this.stackedData = {
+                                        labels: ['Books', 'Videos', 'Rooms'],
+                                        datasets: [{
+                                            type: 'bar',
+                                            label: 'Total',
+                                            backgroundColor: '#42A5F5',
+                                            data: [
+                                              this.numBooks,
+                                              this.numVideos,
+                                              this.numRooms
+                                            ]
+                                        }, {
+                                            type: 'bar',
+                                            label: 'Checked Out',
+                                            backgroundColor: '#FFA726',
+                                            data: [
+                                              this.numAvailableBooks,
+                                              this.numAvailableVideos,
+                                              this.reservedRooms
+                                            ]
+                                        },]
+                                    };
+                            
+                                    this.stackedOptions = {
+                                        tooltips: {
+                                            mode: 'index',
+                                            intersect: false
+                                        },
+                                        responsive: true,
+                                        scales: {
+                                            xAxes: [{
+                                                stacked: true,
+                                            }],
+                                            yAxes: [{
+                                                stacked: true
+                                            }]
+                                        }
+                                    };
+                            
+                                    this.config = this.configService.config;
+                                    this.updateChartOptions();
+                                    this.subscription = this.configService.configUpdate$.subscribe(config => {
+                                        this.config = config;
+                                        this.updateChartOptions();
+                                    });
+                                    }
+                              
+                                  });
+                                }
+                          
+                              });
+                              
+                            }
+                      
+                          });
+                          
+                        }
+                  
+                      });
+                }
             });
-            
-          }
-    
-        });
-        
-      }
-
+        }
     });
+    
+    
     
   }
   updateChartOptions() {
