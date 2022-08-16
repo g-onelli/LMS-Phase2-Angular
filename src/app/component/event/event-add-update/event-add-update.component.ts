@@ -23,8 +23,8 @@ export class EventAddUpdateComponent implements OnInit {
     this.updateClicked = false;
     this.eventForm = new FormGroup ({
       id: new FormControl('', [Validators.pattern(/^[0-9]+$/)]),
-      title: new FormControl('', [Validators.required, Validators.pattern(/^[a-zA-Z ]+$/)]),
-      description: new FormControl('', [Validators.required, Validators.pattern(/^[a-zA-Z ]+$/)]),
+      title: new FormControl('', [Validators.required, Validators.pattern(/^[ A-Za-z0-9_@.,!?/#&+-]*$/)]),
+      description: new FormControl('', [Validators.required, Validators.pattern(/^[ A-Za-z0-9_@.,!?/#&+-]*$/)]),
       date: new FormControl('', [Validators.required, Validators.pattern(/^[0-9]{4}-[0-9]{2}-[0-9]{2}$/)])
     });
   }
