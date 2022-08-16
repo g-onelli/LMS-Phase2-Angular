@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnDestroy } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, Route, Router, RouterStateSnapshot, UrlSegment, UrlTree } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
 import { AuthService } from './auth.service';
@@ -6,7 +6,7 @@ import { AuthService } from './auth.service';
 @Injectable({
   providedIn: 'root'
 })
-export class AuthguardService {
+export class AuthguardService implements OnDestroy{
   bool: boolean;
   subscriptions: Subscription[]=[];
   constructor(private authService: AuthService, private router: Router) { }

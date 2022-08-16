@@ -51,6 +51,8 @@ import { AppConfigService } from './service/app-config.service';
 import { CardComponent } from './component/libdashboard/card/card.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {SplitterModule} from 'primeng/splitter';
+import { EventlistComponent } from './component/patdashboard/eventlist/eventlist.component';
+import {PanelModule} from 'primeng/panel';
 import { SaveRoomComponent } from './component/room/save-room/save-room.component';
 import { ShowOpenComponent } from './component/room/show-open/show-open.component';
 import { ShowReserveComponent } from './component/room/show-reserve/show-reserve.component';
@@ -58,6 +60,7 @@ import { ShowRoomComponent } from './component/libroom/show-room/show-room.compo
 import { ShowReserveLibComponent } from './component/libroom/show-reserve-lib/show-reserve-lib.component';
 import { CreateRoomComponent } from './component/libroom/create-room/create-room.component';
 import { DeleteRoomComponent } from './component/libroom/delete-room/delete-room.component';
+
 
 
 @NgModule({
@@ -104,6 +107,7 @@ import { DeleteRoomComponent } from './component/libroom/delete-room/delete-room
     ProfileBoxComponent,
     ChartComponent,
     CardComponent,
+    EventlistComponent,
     SaveRoomComponent,
     ShowOpenComponent,
     ShowReserveComponent,
@@ -121,7 +125,8 @@ import { DeleteRoomComponent } from './component/libroom/delete-room/delete-room
     HttpClientModule,
     ChartModule,
     CardModule,
-    SplitterModule
+    SplitterModule,
+    PanelModule
   ],
   providers: [AppConfigService],
   bootstrap: [AppComponent]

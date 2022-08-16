@@ -39,7 +39,6 @@ export class FeeComponent implements OnInit {
   }
 
   markPaid(id: number) {
-    console.log(id);
     this.feeService.updateFee(this.fees[id]).subscribe({
       next: (data) => {
         let pName = this.fees[id].patronName;
