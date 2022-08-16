@@ -137,4 +137,24 @@ export class CheckedoutComponent implements OnInit {
       this.checkinMessage = "ID is not listed in your checked out videos! "
     }
   }
+
+  onCheckedInBookPut(){
+    this.checkedOutBookComponent.onCheckedInBookPut();
+    this.availableBooksComponent.displayAvailableBooks();
+  }
+
+  onCheckedOutBookPut(){
+    this.checkedOutBookComponent.onCheckedOutBookPut();
+    this.availableBooksComponent.displayAvailableBooks();
+  }
+
+  onCheckedInVideosPut(){
+    this.checkedOutVideoComponent.onCheckedInVideosPut();
+    this.availableVideosComponent.displayAvailableVideos();
+  }
+
+  onCheckedOutVideosPut(){
+    this.checkedOutVideoComponent.onCheckedOutVideosPut();
+    this.availableVideosComponent.displayAvailableVideos();
+  }
 }

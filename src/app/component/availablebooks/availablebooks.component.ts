@@ -1,6 +1,6 @@
 import { AvailableBooksService } from './../../service/availablebooks.service';
 import { Book } from 'src/app/model/book.model';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-availablebooks',
@@ -8,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./availablebooks.component.css']
 })
 export class AvailablebooksComponent implements OnInit {
+
 
   availableBooks:Book[];
   errorMessage:string;
@@ -23,11 +24,14 @@ export class AvailablebooksComponent implements OnInit {
     this.availableBooksService.fetchAvailableBooks().subscribe({
       next: (data) => {
         this.availableBooks = data;
+
+
       },
       error: (e) => {
         this.errorMessage = 'Books could not be fetched..'
       }
     });
   }
+
 
 }

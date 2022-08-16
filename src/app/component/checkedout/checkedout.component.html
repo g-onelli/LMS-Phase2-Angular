@@ -75,7 +75,7 @@
                                     <div class="box-listagem__item">
                                         <div class="box-listagem__inner">
                                             <div class="box_listagem__field">
-                                                <app-checkedoutbook></app-checkedoutbook>
+                                                <app-checkedoutbook (deleteCheckedOutBookEmitter) = "onCheckedInBookPut()" (postCheckedOutBookEmitter) = "onCheckedOutBookPut()"></app-checkedoutbook>
                                             </div>
                                         </div>
                                     </div>
@@ -99,7 +99,7 @@
                                     <div class="box-listagem__item">
                                         <div class="box-listagem__inner">
                                             <div class="box_listagem__field">
-                                                <app-checkedoutvideo></app-checkedoutvideo>
+                                                <app-checkedoutvideo (deleteCheckedOutVideoEmitter) = "onCheckedInVideosPut()" (postCheckedOutVideoEmitter) = "onCheckedOutVideosPut()"></app-checkedoutvideo>
                                         </div>
                                     </div>
                                 </div>
