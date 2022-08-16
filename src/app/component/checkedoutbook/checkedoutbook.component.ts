@@ -1,7 +1,8 @@
+import { AvailablebooksComponent } from './../availablebooks/availablebooks.component';
 import { PatronService } from 'src/app/service/patron.service';
 import { CheckedoutbookService } from './../../service/checkedoutbook.service';
 import { CheckedOutBook } from './../../model/checkedoutbook.model';
-import { Component, OnInit} from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
 
 @Component({
   selector: 'app-checkedoutbook',
@@ -9,6 +10,10 @@ import { Component, OnInit} from '@angular/core';
   styleUrls: ['./checkedoutbook.component.css']
 })
 export class CheckedoutbookComponent implements OnInit {
+
+  @Output() deleteCheckedOutBookEmitter = new EventEmitter();
+  @Output() postCheckedOutBookEmitter = new EventEmitter();
+
 
   checkedOutBooks: CheckedOutBook[];
   errorMessage: string;
@@ -39,13 +44,38 @@ export class CheckedoutbookComponent implements OnInit {
     })
   }
 
+  onCheckedInBookPut(){
+    this.checkedOutBookService.fetchCheckedOutBooksById(this.pId).subscribe({
+      next: (data) => {
+        this.checkedOutBooks = data;
+      },
+      error: (e) =>{
+
+      }
+    })
+  }
+
+  onCheckedOutBookPut(){
+    this.checkedOutBookService.fetchCheckedOutBooksById(this.pId).subscribe({
+      next: (data) => {
+        this.checkedOutBooks = data;
+      },
+      error: (e) =>{
+
+      }
+    })
+  }
+
+  
+
   checkOutBook(pId: number, bId: number) {
     this.checkedOutBookService.postCheckedOutBook(pId, bId).subscribe({
       next: (data) => {
         this.checkedOutBooks = data;
+        this.postCheckedOutBookEmitter.emit(bId);
       },
       error: (e) => {
-        this.errorMessage = "ID does not exits in list of available books!!!"
+        this.errorMessage = "throw"
       }
     })
   }
@@ -53,10 +83,11 @@ export class CheckedoutbookComponent implements OnInit {
   checkInBook(id: number) {
     this.checkedOutBookService.deleteCheckedOutBook(id).subscribe({
       next: (data) => {
-        this.checkedOutBooks = this.checkedOutBooks.filter(cb => cb.id != id);
+        this.checkedOutBooks = data;
+        this.deleteCheckedOutBookEmitter.emit(id);
       },
       error: (e) => {
-        this.errorMessage = "ID does not exist in list of checked out books!!!"
+        this.errorMessage = "throw"
       }
     });
   }

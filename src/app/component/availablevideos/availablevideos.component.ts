@@ -32,4 +32,12 @@ export class AvailablevideosComponent implements OnInit {
     });
   }
 
+  onCheckedOutPut(){
+
+  }
+
+  onCheckedInPut(){
+    
+  }
+
 }
