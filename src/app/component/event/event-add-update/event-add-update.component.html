@@ -3,7 +3,7 @@
     <input type="text" name="id" formControlName="id">
     <span *ngIf="eventForm.controls['id'].invalid
             && eventForm.controls['id'].touched">
-        <span *ngIf="eventForm.controls['id'].errors['pattern']">Pattern Allowed: [0-9]+</span>
+        <span *ngIf="eventForm.controls['id'].errors['pattern']">Find an Id using the above list(Numbers Only)</span>
     </span>
     <br /> <br />
     <label>Enter Event Title: </label>
@@ -11,14 +11,14 @@
     <span *ngIf="eventForm.controls['title'].invalid
             && eventForm.controls['title'].touched">
         <span *ngIf="eventForm.controls['title'].errors['required']">Title is Required</span>
-        <span *ngIf="eventForm.controls['title'].errors['pattern']">Pattern Allowed: [a-zA-Z ]+</span>
+        <span *ngIf="eventForm.controls['title'].errors['pattern']">Alphanumerical Characters Only</span>
     </span>
     <br /> <br />
     <label>Enter Event Date: </label>
     <input type="text" name="date" formControlName="date">
     <span *ngIf="eventForm.controls['date'].invalid
             && eventForm.controls['date'].touched">
-        <span *ngIf="eventForm.controls['date'].errors['required']">Title is Required</span>
+        <span *ngIf="eventForm.controls['date'].errors['required']">Date is Required</span>
         <span *ngIf="eventForm.controls['date'].errors['pattern']">Pattern Allowed: [YYYY-MM-DD]</span>
     </span>
     <br /> <br />
@@ -26,8 +26,8 @@
     <input type="text" name="description" formControlName="description">
     <span *ngIf="eventForm.controls['description'].invalid
             && eventForm.controls['description'].touched">
-        <span *ngIf="eventForm.controls['description'].errors['required']">Title is Required</span>
-        <span *ngIf="eventForm.controls['description'].errors['pattern']">Pattern Allowed: [a-zA-Z ]+</span>
+        <span *ngIf="eventForm.controls['description'].errors['required']">Description is Required</span>
+        <span *ngIf="eventForm.controls['description'].errors['pattern']">Alphanumerical Characters Only</span>
     </span>
     <br /> <br />&nbsp;&nbsp;
     <button type="submit" (click)="onAddClick()" [disabled]="!eventForm.valid">Add</button> &nbsp;&nbsp;
