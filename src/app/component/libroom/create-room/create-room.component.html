@@ -1,1 +1,18 @@
-<p>create-room works!</p>
+<form (submit)="addRoomFunc()" [formGroup]="addRoomForm">
+    <label>Enter Room Number</label>
+    <br>
+    <input type="number" name="rNum" formControlName="rNum">
+    <br>
+    <br>
+    <label>Enter Number of People the Room can Hold</label>
+    <br>
+    <input type="number" name="cap" formControlName="cap">
+    <br>
+    <br>
+    <label>Enter Number of Presenter Tools Present</label>
+    <br>
+    <input type="number" name="pt" formControlName="pt">
+    <br>
+    <br>
+    <input type="submit" value="add room to database">
+</form>
