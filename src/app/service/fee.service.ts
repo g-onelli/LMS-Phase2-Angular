@@ -12,6 +12,7 @@ export class FeeService {
   postFeeApi: string;
   getFeesApi: string;
   getFeesByPatronIdApi: string;
+  getFeesByPatronUsernameApi: string;
   updateFeeApi: string;
 
   fee$ = new BehaviorSubject<FeeModel[]>([]);
@@ -21,14 +22,22 @@ export class FeeService {
     this.getFeesApi = environment.serverUrl + '/fee/patron';
     this.updateFeeApi = environment.serverUrl + '/fee/';
     this.getFeesByPatronIdApi = environment.serverUrl + '/fee/';
+    this.getFeesByPatronUsernameApi = environment.serverUrl + '/fee/patron/';
   }
 
-  postFee() {
-
+  postFee(patId: number, fee: FeeModel): Observable<any>{
+    let encodedCredentials = localStorage.getItem('credentials');
+    let httpOptions = {
+      headers: new HttpHeaders({
+        'Content-type': 'application/json',
+        'Authorization': 'basic ' + encodedCredentials
+      })
+    };
+    return this.http.post<any>(this.postFeeApi + '/' + patId, fee, httpOptions);
   }
 
-  getFees() : Observable<FeeModel[]> {
-    let encodedCredentials= localStorage.getItem('credentials');
+  getFees(): Observable<FeeModel[]> {
+    let encodedCredentials = localStorage.getItem('credentials');
     let httpOptions = {
       headers: new HttpHeaders({
         'Content-type': 'application/json',
@@ -38,20 +47,19 @@ export class FeeService {
     return this.http.get<FeeModel[]>(this.getFeesApi, httpOptions);
   }
 
-  updateFee(fee: FeeModel):Observable<FeeModel> {
-    let encodedCredentials= localStorage.getItem('credentials');
+  updateFee(fee: FeeModel): Observable<FeeModel> {
+    let encodedCredentials = localStorage.getItem('credentials');
     let httpOptions = {
       headers: new HttpHeaders({
         'Content-type': 'application/json',
         'Authorization': 'basic ' + encodedCredentials
       })
     };
-    console.log(fee.id);
     return this.http.put<FeeModel>(this.updateFeeApi + fee.id, fee, httpOptions);
   }
 
-getFeeByPatron(patronId: number) : Observable<FeeModel[]> {
-    let encodedCredentials= localStorage.getItem('credentials');
+  getFeeByPatron(patronId: number): Observable<FeeModel[]> {
+    let encodedCredentials = localStorage.getItem('credentials');
     let httpOptions = {
       headers: new HttpHeaders({
         'Content-type': 'application/json',
@@ -60,8 +68,20 @@ getFeeByPatron(patronId: number) : Observable<FeeModel[]> {
     };
     return this.http.get<FeeModel[]>(this.getFeesByPatronIdApi + patronId, httpOptions);
   }
-  getAllFees() : Observable<FeeModel[]> {
-    let encodedCredentials= localStorage.getItem('credentials');
+
+  getFeeByPatronUsername(patronUsername: string): Observable<FeeModel[]> {
+    let encodedCredentials = localStorage.getItem('credentials');
+    let httpOptions = {
+      headers: new HttpHeaders({
+        'Content-type': 'application/json',
+        'Authorization': 'basic ' + encodedCredentials
+      })
+    };
+    return this.http.get<FeeModel[]>(this.getFeesByPatronUsernameApi + patronUsername, httpOptions);
+  }
+
+  getAllFees(): Observable<FeeModel[]> {
+    let encodedCredentials = localStorage.getItem('credentials');
     let httpOptions = {
       headers: new HttpHeaders({
         'Content-type': 'application/json',
