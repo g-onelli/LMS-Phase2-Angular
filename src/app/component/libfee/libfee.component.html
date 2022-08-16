@@ -19,12 +19,48 @@
                                         <div class="box-listagem__item">
                                             <div class="box-listagem__inner">
                                                 <div class="box_listagem__field">
-                                                    <select name="Patrons" id="patronDropdown">
-                                                        <option *ngFor="let p of patrons" [value]="p">
+                                                    Select a Patron to Manage Fees:
+                                                    <select [(ngModel)]="selectedOption">
+                                                        <option *ngFor="let p of patrons" [value]="p.username">
                                                             {{p.name}}
-                                                            </option>
-                                                    </select>
+                                                        </option>
+                                                    </select> &nbsp;&nbsp;
+                                                    <button (click)="select()">Select</button> &nbsp;&nbsp;
+                                                    <button *ngIf="showAdd" (click)="addFee()">Add Fee</button>&nbsp;&nbsp;
+                                                    <span *ngIf="showBalance">Balance: ${{balance}}</span>
                                                 </div>
+                                            </div>
+                                            <div class="box-listagem__item" *ngFor="let f of fees, let i = index">
+                                                <div class="box-listagem__inner">
+                                                    <div class="box_listagem__field" *ngIf="!emptyFee">
+                                                        Patron: <strong>{{f.patronName}}</strong>&nbsp;
+                                                        Type: {{f.feeType}}&nbsp;
+                                                        Amount: ${{f.total}}&nbsp;
+                                                        Date Paid: {{f.datePaid}}
+                                                        <span *ngIf="f.datePaid == null">UNPAID&nbsp;&nbsp;</span>
+                                                        <button (click)="editClicked(i)">Edit</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div *ngIf="showEdit">
+                                                <form class="box-listagem__item" [formGroup]="feeForm"
+                                                    (ngSubmit)="onEditSubmit()">
+                                                    <label>Type: </label>
+                                                    <input type="text" name="type" formControlName="type"> &nbsp;&nbsp;
+                                                    <label>Amount: $</label>
+                                                    <input type="text" name="amount" formControlName="amount"> &nbsp;&nbsp;
+                                                    <button type="submit" >Update</button>
+                                                </form>
+                                            </div>
+                                            <div *ngIf="showAddForm">
+                                                <form class="box-listagem__item" [formGroup]="addForm"
+                                                    (ngSubmit)="onAddSubmit()">
+                                                    <label>Type: </label>
+                                                    <input type="text" name="type" formControlName="type"> &nbsp;&nbsp;
+                                                    <label>Amount: $</label>
+                                                    <input type="text" name="amount" formControlName="amount"> &nbsp;&nbsp;
+                                                    <button type="submit" >Add</button>
+                                                </form>
                                             </div>
                                         </div>
                                     </div>

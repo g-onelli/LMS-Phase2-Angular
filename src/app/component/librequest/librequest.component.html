@@ -20,10 +20,10 @@
                                         </div>
                                         <div class="librequest-add">
                                             
-                                            <app-librequest-add> </app-librequest-add>
+                                            <app-librequest-add (putRequestEmitter)="onRequestPut($event)"> </app-librequest-add>
                                         </div>
                                         <div class="librequest-delete">
-                                            <app-librequest-delete> </app-librequest-delete>
+                                            <app-librequest-delete (deleteRequestEmitter)="onRequestDelete($event)"> </app-librequest-delete>
                                         </div>
                                     </div>
                                 </div>

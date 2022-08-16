@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { PatronEditDto } from 'src/app/auth/model/user.model';
 import { Patron } from 'src/app/model/patron.model';
 import { PatronService } from 'src/app/service/patron.service';
 
@@ -8,7 +9,7 @@ import { PatronService } from 'src/app/service/patron.service';
   templateUrl: './patron.component.html',
   styleUrls: ['./patron.component.less']
 })
-export class PatronComponent implements OnInit {
+export class PatronComponent implements OnInit,OnDestroy {
   patrons: Patron[];
   subscriptions: Subscription[]=[];
   page:number;
@@ -21,6 +22,7 @@ export class PatronComponent implements OnInit {
     this.subscriptions.push(
       this.patronService.ppage$.subscribe(value=>{
           this.page = value;
+          this.subscriptions.push(
           this.patronService.getAllPatrons(this.page,this.size).subscribe({
             next: (data)=>{
                 this.patrons = data;
@@ -29,13 +31,39 @@ export class PatronComponent implements OnInit {
             error: (e)=>{
               //redirect to error page
             }
-          });
+          })
+          );
       })
     );
 
 
   }
+  onPatronDelete(id : number){
+    this.subscriptions.push(
+    this.patronService.getAllPatrons(this.page,this.size).subscribe({
+      next: (data)=>{
+         this.patrons = this.patrons.filter(p=>p.id != id);
+         this.patronService.patron$.next(this.patrons);
+      },
+      error: (e)=>{
 
+      }
+  })
+  );
+ }
+ onPatronPut(data : PatronEditDto){
+  this.subscriptions.push(
+  this.patronService.getAllPatrons(this.page,this.size).subscribe({
+    next: (data)=>{
+       this.patrons = data;
+       this.patronService.patron$.next(this.patrons);
+    },
+    error: (e)=>{
+
+    }
+})
+);
+}
   ngOnDestroy(): void {
     this.subscriptions.forEach(sub=>sub.unsubscribe());
   }

@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { Patron } from 'src/app/model/patron.model';
 import { PatronService } from 'src/app/service/patron.service';
 
@@ -7,20 +8,23 @@ import { PatronService } from 'src/app/service/patron.service';
   templateUrl: './patron-list.component.html',
   styleUrls: ['./patron-list.component.less']
 })
-export class PatronListComponent implements OnInit {
+export class PatronListComponent implements OnInit,OnDestroy {
 
   patrons: Patron[];
   page:number;
   total:number;
+  subscriptions: Subscription[]=[];
   constructor(private patronService: PatronService) { }
 
   ngOnInit(): void {
     this.page = this.patronService.ppage$.getValue();
     this.patronService.ppage$.next(this.page);
+    this.subscriptions.push(
     this.patronService.patron$.subscribe(data=>{
       this.patrons = data;
       this.total = data[0].totalpages;
-    });
+    })
+    );
   }
   prev(){
       //read the value of page from subject
@@ -42,7 +46,7 @@ export class PatronListComponent implements OnInit {
     //attach the updated value to the subject
     this.patronService.ppage$.next(this.page);
   }
-fill(){
-  
-}
+  ngOnDestroy(): void {
+    this.subscriptions.forEach(sub=>sub.unsubscribe());
+  }
 }
