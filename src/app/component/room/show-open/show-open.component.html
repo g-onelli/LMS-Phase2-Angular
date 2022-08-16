@@ -1,0 +1,32 @@
+<form (submit)="newRoomData()" [formGroup]="checkDateForm">
+    <span>
+        When are you looking to reserve a room?
+    </span>
+    <br>
+    <br>
+    <label> 
+        The date: 
+    </label>
+    <input type="date" name="date"  formControlName="date" >
+    <br>
+    <br>
+    <label>
+        The time 
+    </label>
+    <input type="text" name="time"  formControlName="time"><br>
+    <br>
+    <br>
+    <input type="submit" value="submit time"> 
+</form>
+
+    <br>
+    <br>
+    <div *ngIf="roomList!=[]">
+        <div *ngFor="let r of roomList">
+            Room: {{r.roomNumber}}
+            &nbsp;
+            Accomodation Capacity: {{r.capacity}}
+            &nbsp;
+            Number of Presentation Tools: {{r.hasPresenterTools}}
+        </div>
+    </div>

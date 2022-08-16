@@ -1,0 +1,24 @@
+
+<form (submit)="saveRoom()" [formGroup]="saveRoomForm">
+    <label>Patron ID</label>
+    <input type="number" name="pid" formGroupName="pid">
+    <br>
+    <br>
+    <label>Room Number</label>
+    <input type="number" name="rNum" formGroupName="rNum">
+    <br>
+    <br>
+    <label>Date</label>
+    <input type="date" name="strDate" formGroupName="strDate">
+    <br>
+    <br>
+    <label>Time</label>
+    <input type="string" name="time" formGroupName="time">
+    <br>
+    <br>
+    <label>Duration</label>
+    <input type="number" name="duration" formGroupName="duration">
+    <br>
+    <br>
+    <input type="submit" value="Make Reservation">
+</form>

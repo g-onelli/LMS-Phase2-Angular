@@ -1,0 +1,13 @@
+<button (click)="showAllRooms()"></button>
+
+<br>
+<br>
+<div *ngIf="roomList!=[]">
+    <div *ngFor="let r of roomList">
+        Room: {{r.roomNumber}}
+        &nbsp;
+        Accomodation Capacity: {{r.capacity}}
+        &nbsp;
+        Number of Presentation Tools: {{r.hasPresenterTools}}
+    </div>
+</div>
