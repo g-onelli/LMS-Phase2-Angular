@@ -1,14 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { RequestService } from 'src/app/service/request.service';
-import { Requests } from 'src/app/model/request.model';
+import { CompleteRequest, Requests } from 'src/app/model/request.model';
 
 @Component({
   selector: 'app-librequest',
   templateUrl: './librequest.component.html',
   styleUrls: ['./librequest.component.less']
 })
-export class LibrequestComponent implements OnInit {
+export class LibrequestComponent implements OnInit,OnDestroy {
 
   requests: Requests[];
   subscriptions: Subscription[]=[];
@@ -36,6 +36,32 @@ export class LibrequestComponent implements OnInit {
 
 
   }
+  onRequestDelete(id : number){
+    this.subscriptions.push(
+    this.requestService.getAllRequests(this.page,this.size).subscribe({
+      next: (data)=>{
+         this.requests = data;
+         this.requestService.request$.next(this.requests);
+      },
+      error: (e)=>{
+
+      }
+  })
+  );
+ }
+ onRequestPut(completeRequest: CompleteRequest){
+  this.subscriptions.push(
+  this.requestService.getAllRequests(this.page,this.size).subscribe({
+    next: (data)=>{
+       this.requests = data;
+       this.requestService.request$.next(this.requests);
+    },
+    error: (e)=>{
+
+    }
+})
+);
+}
   ngOnDestroy(): void {
     this.subscriptions.forEach(sub=>sub.unsubscribe());
   }

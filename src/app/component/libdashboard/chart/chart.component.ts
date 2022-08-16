@@ -98,7 +98,6 @@ export class ChartComponent implements OnInit, OnDestroy {
                     this.numAvailableBooks = data.length;
                     this.numAvailableBooks = (this.numBooks-this.numAvailableBooks);
                     this.numAvailableVideos =(this.numVideos-this.numAvailableVideos);
-                    console.log(this.numAvailableBooks);
                     this.stackedData = {
                       labels: ['Books', 'Videos', 'Rooms'],
                       datasets: [{
@@ -112,7 +111,7 @@ export class ChartComponent implements OnInit, OnDestroy {
                       }, {
                           type: 'bar',
                           label: 'Checked Out',
-                          backgroundColor: '#66BB6A',
+                          backgroundColor: '#FFA726',
                           data: [
                             this.numAvailableBooks,
                             this.numAvailableVideos
@@ -166,113 +165,6 @@ export class ChartComponent implements OnInit, OnDestroy {
 }
 
 applyDarkTheme() {
-    this.basicOptions = {
-        plugins: {
-            legend: {
-                labels: {
-                    color: '#ebedef'
-                }
-            }
-        },
-        scales: {
-            x: {
-                ticks: {
-                    color: '#ebedef'
-                },
-                grid: {
-                    color: 'rgba(255,255,255,0.2)'
-                }
-            },
-            y: {
-                ticks: {
-                    color: '#ebedef'
-                },
-                grid: {
-                    color: 'rgba(255,255,255,0.2)'
-                }
-            }
-        }
-    };
-
-    this.horizontalOptions = {
-        indexAxis: 'y',
-        plugins: {
-            legend: {
-                labels: {
-                    color: '#ebedef'
-                }
-            }
-        },
-        scales: {
-            x: {
-                ticks: {
-                    color: '#ebedef'
-                },
-                grid: {
-                    color: 'rgba(255,255,255,0.2)'
-                }
-            },
-            y: {
-                ticks: {
-                    color: '#ebedef'
-                },
-                grid: {
-                    color: 'rgba(255,255,255,0.2)'
-                }
-            }
-        }
-    };
-
-    this.multiAxisOptions = {
-        plugins: {
-            legend: {
-                labels: {
-                    color: '#ebedef'
-                }
-            },
-            tooltips: {
-                mode: 'index',
-                intersect: true
-            }
-        },
-        scales: {
-            x: {
-                ticks: {
-                    color: '#ebedef'
-                },
-                grid: {
-                    color: 'rgba(255,255,255,0.2)'
-                }
-            },
-            y: {
-                type: 'linear',
-                display: true,
-                position: 'left',
-                ticks: {
-                    min: 0,
-                    max: 100,
-                    color: '#ebedef'
-                },
-                grid: {
-                    color: 'rgba(255,255,255,0.2)'
-                }
-            },
-            y1: {
-                type: 'linear',
-                display: true,
-                position: 'right',
-                grid: {
-                    drawOnChartArea: false,
-                    color: 'rgba(255,255,255,0.2)'
-                },
-                ticks: {
-                    min: 0,
-                    max: 100,
-                    color: '#ebedef'
-                }
-            }
-        }
-    };
 
     this.stackedOptions = {
         plugins: {
@@ -310,113 +202,6 @@ applyDarkTheme() {
 }
 
 applyLightTheme() {
-    this.basicOptions = {
-        plugins: {
-            legend: {
-                labels: {
-                    color: '#495057'
-                }
-            }
-        },
-        scales: {
-            x: {
-                ticks: {
-                    color: '#495057'
-                },
-                grid: {
-                    color: '#ebedef'
-                }
-            },
-            y: {
-                ticks: {
-                    color: '#495057'
-                },
-                grid: {
-                    color: '#ebedef'
-                }
-            }
-        }
-    };
-
-    this.horizontalOptions = {
-        indexAxis: 'y',
-        plugins: {
-            legend: {
-                labels: {
-                    color: '#495057'
-                }
-            }
-        },
-        scales: {
-            x: {
-                ticks: {
-                    color: '#495057'
-                },
-                grid: {
-                    color: '#ebedef'
-                }
-            },
-            y: {
-                ticks: {
-                    color: '#495057'
-                },
-                grid: {
-                    color: '#ebedef'
-                }
-            }
-        }
-    };
-
-    this.multiAxisOptions = {
-        plugins: {
-            legend: {
-                labels: {
-                    color: '#495057'
-                }
-            },
-            tooltips: {
-                mode: 'index',
-                intersect: true
-            }
-        },
-        scales: {
-            x: {
-                ticks: {
-                    color: '#495057'
-                },
-                grid: {
-                    color: '#ebedef'
-                }
-            },
-            y: {
-                type: 'linear',
-                display: true,
-                position: 'left',
-                ticks: {
-                    min: 0,
-                    max: 100,
-                    color: '#495057'
-                },
-                grid: {
-                    color: '#ebedef'
-                }
-            },
-            y1: {
-                type: 'linear',
-                display: true,
-                position: 'right',
-                grid: {
-                    drawOnChartArea: false,
-                    color: '#ebedef'
-                },
-                ticks: {
-                    min: 0,
-                    max: 100,
-                    color: '#495057'
-                }
-            }
-        }
-    };
 
     this.stackedOptions = {
         plugins: {

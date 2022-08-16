@@ -22,7 +22,6 @@ export class EventListComponent implements OnInit {
     this.eventService.event$.subscribe(data => {
         this.events = data;
         if(this.events.length > 0) {
-          console.log(this.events[0].pages);
           this.totalPages = this.events[0].pages;
         }
     })

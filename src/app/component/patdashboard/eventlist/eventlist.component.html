@@ -1,0 +1,16 @@
+<div class="box-listagem__item" *ngFor="let e of events">
+    <div class="box-listagem__inner">
+            <p-panel header={{e.title}} [toggleable]="true">
+                {{e.description}}
+                <ng-template pTemplate="footer">
+                    Date: {{e.date}}
+                </ng-template>
+            </p-panel>
+        
+    </div>
+</div>
+<div class="box-listagem__item">
+    <a href="Javascript:void(0)" (click)="prev()" *ngIf="page>0">Prev</a> &nbsp;&nbsp;&nbsp;&nbsp;
+    {{page+1}}/{{totalPages}} &nbsp;&nbsp;&nbsp;&nbsp;
+    <a href="Javascript:void(0)" (click)="next()" *ngIf="events.length == 10">Next</a>
+</div>

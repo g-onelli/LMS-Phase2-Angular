@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { PatronEditDto } from 'src/app/auth/model/user.model';
 import { Patron } from 'src/app/model/patron.model';
 import { PatronService } from 'src/app/service/patron.service';
@@ -10,7 +11,7 @@ import { PatronService } from 'src/app/service/patron.service';
   templateUrl: './patron-add.component.html',
   styleUrls: ['./patron-add.component.less']
 })
-export class PatronAddComponent implements OnInit {
+export class PatronAddComponent implements OnInit,OnDestroy {
   patronEditDto: PatronEditDto;
   temp: PatronEditDto;
   patronForm :FormGroup;
@@ -19,6 +20,9 @@ export class PatronAddComponent implements OnInit {
   tempname: string;
   tempcard: string;
   tempbalance: number;
+  subscriptions: Subscription[]=[];
+  @Output()
+  putPatronEmitter = new EventEmitter();
 
   constructor(private patronService: PatronService, private router: Router) { }
 
@@ -32,6 +36,7 @@ export class PatronAddComponent implements OnInit {
     });
   }
 onFormSubmit(){
+  this.subscriptions.push(
   this.patronService.getPatronById(this.patronForm.value.id).subscribe({
     next: (data)=>{ 
       this.temp = data;
@@ -53,19 +58,25 @@ onFormSubmit(){
         cardexpirationdate: this.patronForm.value.cardexpirationdate,
         balance: this.patronForm.value.balance
       };
+      this.subscriptions.push(
       this.patronService.putPatron(this.patronEditDto).subscribe({
         next: (data)=>{
           this.msg='Profile Updated';
+          this.putPatronEmitter.emit(this.patronEditDto);
         },
         error: (e)=>{
           this.msg='Operation failed';
         }
-      });
+      })
+      );
     },
     error: (e)=>{ 
       this.msg='Invalid Id';
      }
-  });
+  })
+  );
 }
-
+ngOnDestroy(): void {
+  this.subscriptions.forEach(sub=>sub.unsubscribe());
+}
 }

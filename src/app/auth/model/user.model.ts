@@ -40,3 +40,6 @@ export class PatronId{
     id: number;
     name: string;
 }
+export class LibrarianId{
+    id: number;
+}
