@@ -51,6 +51,8 @@ import { AppConfigService } from './service/app-config.service';
 import { CardComponent } from './component/libdashboard/card/card.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {SplitterModule} from 'primeng/splitter';
+import { EventlistComponent } from './component/patdashboard/eventlist/eventlist.component';
+import {PanelModule} from 'primeng/panel';
 
 
 @NgModule({
@@ -97,6 +99,7 @@ import {SplitterModule} from 'primeng/splitter';
     ProfileBoxComponent,
     ChartComponent,
     CardComponent,
+    EventlistComponent,
   ],
   imports: [
     BrowserModule,
@@ -107,7 +110,8 @@ import {SplitterModule} from 'primeng/splitter';
     HttpClientModule,
     ChartModule,
     CardModule,
-    SplitterModule
+    SplitterModule,
+    PanelModule
   ],
   providers: [AppConfigService],
   bootstrap: [AppComponent]

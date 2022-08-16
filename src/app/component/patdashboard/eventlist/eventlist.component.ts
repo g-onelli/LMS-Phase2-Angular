@@ -3,11 +3,11 @@ import { EventModel } from 'src/app/model/event.model';
 import { EventService } from 'src/app/service/event.service';
 
 @Component({
-  selector: 'app-event-list',
-  templateUrl: './event-list.component.html',
-  styleUrls: ['./event-list.component.less']
+  selector: 'app-eventlist',
+  templateUrl: './eventlist.component.html',
+  styleUrls: ['./eventlist.component.less']
 })
-export class EventListComponent implements OnInit {
+export class EventlistComponent implements OnInit {
 
   events: EventModel[];
   page: number;
@@ -35,7 +35,10 @@ export class EventListComponent implements OnInit {
 
   next() {
     let page = this.eventService.page$.getValue();
-    this.page = page +1;
+    if(page<this.totalPages-1){
+      //update the value of page
+        this.page = page+1;
+      }
     this.eventService.page$.next(this.page);
   }
 

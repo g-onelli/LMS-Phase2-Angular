@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { EventModel } from 'src/app/model/event.model';
 import { EventService } from 'src/app/service/event.service';
+import { LibrarianService } from 'src/app/service/librarian.service';
 
 @Component({
   selector: 'app-event-add-update',
@@ -15,7 +16,7 @@ export class EventAddUpdateComponent implements OnInit {
   eventForm: FormGroup;
   updateClicked: boolean;
 
-  constructor(private eventService : EventService) { }
+  constructor(private eventService : EventService, private librarianService: LibrarianService) { }
 
   ngOnInit(): void {
     this.msg = '';
@@ -46,29 +47,36 @@ export class EventAddUpdateComponent implements OnInit {
 
   onFormSubmit() {
     this.event = this.eventForm.value;
-    console.log(this.event);
-    let placeHolderId = 21;
-    this.eventService.postEvent(this.event, placeHolderId).subscribe({
+    
+    this.librarianService.getIdByCredentials().subscribe({
       next: (data) => {
-        this.event = data;
-        this.msg = 'Added Event to System';
-        //if the array has space, add the new event to the display array
-        if(this.eventService.event$.getValue().length < 3) {
-          let eventArray = this.eventService.event$.getValue();
-          eventArray.push(this.event);
-          this.eventService.event$.next(eventArray);
-        }
+        let id = data.id;
+        this.eventService.postEvent(this.event, id).subscribe({
+          next: (data) => {
+            this.event = data;
+            this.msg = 'Added Event to System';
+            //if the array has space, add the new event to the display array
+            if(this.eventService.event$.getValue().length < 3) {
+              let eventArray = this.eventService.event$.getValue();
+              eventArray.push(this.event);
+              this.eventService.event$.next(eventArray);
+            }
+          },
+          error: (e) => {
+
+          }
+        })
       },
-      error: (e) => {
-        console.log(e);
+      error: (e)=>{
+
       }
     })
+
   }
 
   onFormUpdate() {
     let eventArray = this.eventService.event$.getValue();
     this.event = this.eventForm.value;
-    console.log(this.event);
     let index = eventArray.findIndex(obj => obj.id == this.event.id);
     this.eventService.updateByIdEvent(this.event.id, this.event).subscribe({
       next: (data) => {
