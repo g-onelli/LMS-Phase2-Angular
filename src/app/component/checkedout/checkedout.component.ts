@@ -1,10 +1,10 @@
+import { AvailablevideosComponent } from './../availablevideos/availablevideos.component';
+import { AvailablebooksComponent } from './../availablebooks/availablebooks.component';
 import { PatronService } from 'src/app/service/patron.service';
-import { getTestBed } from '@angular/core/testing';
 import { CheckedoutvideoComponent } from './../checkedoutvideo/checkedoutvideo.component';
 import { CheckedoutbookComponent } from './../checkedoutbook/checkedoutbook.component';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { PatronComponent } from '../patron/patron.component';
 
 
 
@@ -19,16 +19,23 @@ export class CheckedoutComponent implements OnInit {
 
   checkOutForm: FormGroup;
   checkInForm: FormGroup;
-  message: string;
+  checkinMessage: string;
+  checkoutMessage : string;
   pId: number;
+  flag : boolean;
+
 
   @ViewChild(CheckedoutbookComponent) checkedOutBookComponent: CheckedoutbookComponent;
   @ViewChild(CheckedoutvideoComponent) checkedOutVideoComponent: CheckedoutvideoComponent;
+  @ViewChild(AvailablebooksComponent) availableBooksComponent: AvailablebooksComponent;
+  @ViewChild(AvailablevideosComponent) availableVideosComponent: AvailablevideosComponent;
 
   constructor(private patronService : PatronService) { }
 
   ngOnInit(): void {
-    this.message = '';
+    this.checkinMessage = '';
+    this.checkoutMessage = '';
+
     
   
     this.checkOutForm = new FormGroup({
@@ -43,37 +50,60 @@ export class CheckedoutComponent implements OnInit {
 
   }
 
+  checkAvailableBooks(){
+    this.flag = false;
+    for(var i = 0; i < this.availableBooksComponent.availableBooks.length; i++){
+      console.log(this.flag)
+      if(this.checkOutForm.value.itemId == this.availableBooksComponent.availableBooks[i].id){
+        this.flag = true;
+        break;
+      }
+    }
+  }
+  checkAvailableVideos() {
+    this.flag = false;
+    for(var i = 0; i < this.availableVideosComponent.availableVideos.length; i++){
+      console.log(this.flag)
+      if(this.checkOutForm.value.itemId == this.availableVideosComponent.availableVideos[i].id){
+        this.flag = true;
+        break;
+      }
+    }
+  }
   checkOutFormSubmit() {
-    console.log(parseInt(this.checkOutForm.value.itemId));
-    console.log(this.checkOutForm.value.iType)
-
-
-
     if (this.checkOutForm.value.iType === "book") {
+      
+      this.checkAvailableBooks();
+      if(this.flag == true){
 
-      this.patronService.getIdByCredentials().subscribe({
-        next: (data)=>{
-          this.pId = data.id;
-          this.checkOutBook(this.pId, parseInt(this.checkOutForm.value.itemId));
-        }
-      })
-
+        this.patronService.getIdByCredentials().subscribe({
+          next: (data)=>{
+            this.pId = data.id;
+            this.checkOutBook(this.pId, parseInt(this.checkOutForm.value.itemId));
+          }
+        })
+        
+      }
+      else{
+        this.checkoutMessage = "ID is not listed in available books!"
+      }
     }
     else {
 
-      this.patronService.getIdByCredentials().subscribe({
-        next: (data)=>{
-          this.pId = data.id;
-          this.checkOutVideo(this.pId, parseInt(this.checkOutForm.value.itemId));
-        }
-      })
-     
-
+      this.checkAvailableVideos();
+      if(this.flag == true){
+        this.patronService.getIdByCredentials().subscribe({
+          next: (data)=>{
+            this.pId = data.id;
+            this.checkOutVideo(this.pId, parseInt(this.checkOutForm.value.itemId));
+          }
+        })
+      }
+      else{
+        this.checkoutMessage = "ID is not listed in available videos!"
+      }
     }
-
-
   }
-
   checkInFormSubmit() {
 
     if (this.checkInForm.value.iType === "book") {
@@ -85,9 +115,7 @@ export class CheckedoutComponent implements OnInit {
           this.checkInVideo(parseInt(this.checkInForm.value.itemId));
 
   }
-}
-
-
+  }
   checkOutBook(pId: number, bId: number) {
 
     this.checkedOutBookComponent.checkOutBook(pId, bId);
@@ -97,16 +125,16 @@ export class CheckedoutComponent implements OnInit {
 
    this.checkedOutVideoComponent.checkOutVideo(pId, vId);
   }
-
   checkInBook(id: number) {
     this.checkedOutBookComponent.checkInBook(id);
+    if(this.checkedOutBookComponent.errorMessage = "throw"){
+      this.checkinMessage = "ID is not listed in your checked out books! "
+    }
   }
-
   checkInVideo(id: number) {
     this.checkedOutVideoComponent.checkInVideo(id);
+    if(this.checkedOutBookComponent.errorMessage = "throw"){
+      this.checkinMessage = "ID is not listed in your checked out videos! "
+    }
   }
-
-
-
-
 }
