@@ -46,7 +46,6 @@ export class EventAddUpdateComponent implements OnInit {
 
   onFormSubmit() {
     this.event = this.eventForm.value;
-    console.log(this.event);
     let placeHolderId = 21;
     this.eventService.postEvent(this.event, placeHolderId).subscribe({
       next: (data) => {
@@ -68,7 +67,6 @@ export class EventAddUpdateComponent implements OnInit {
   onFormUpdate() {
     let eventArray = this.eventService.event$.getValue();
     this.event = this.eventForm.value;
-    console.log(this.event);
     let index = eventArray.findIndex(obj => obj.id == this.event.id);
     this.eventService.updateByIdEvent(this.event.id, this.event).subscribe({
       next: (data) => {
