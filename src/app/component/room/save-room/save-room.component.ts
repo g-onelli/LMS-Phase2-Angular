@@ -11,6 +11,7 @@ import { RoomService } from 'src/app/service/room.service';
 export class SaveRoomComponent implements OnInit {
   saveRoomForm:FormGroup;
   reserveObj: reservation;
+  check:reservation;
   
   constructor(private roomservice:RoomService) { }
 
@@ -20,7 +21,7 @@ export class SaveRoomComponent implements OnInit {
       rNum: new FormControl("", [Validators.required,Validators.pattern(/[0-9]+/)]),
       strDate: new FormControl("",[Validators.required]),
       time: new FormControl("",[Validators.required,Validators.pattern(/^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/)]),
-      duration: new FormControl("",[Validators.required,Validators.pattern(/[0-3]/)])
+      duration: new FormControl("",[Validators.required,Validators.pattern(/[1-5]/)])
     })
   }
 
@@ -34,7 +35,9 @@ export class SaveRoomComponent implements OnInit {
       strDate: this.saveRoomForm.value.strDate
     }
     console.log(this.reserveObj);
-    this.roomservice.makeReservation(this.reserveObj).subscribe();
+    this.roomservice.makeReservation(this.reserveObj).subscribe(data=>{
+      this.check=data;
+    });
     console.log("We have sent the submission");
   }
 
