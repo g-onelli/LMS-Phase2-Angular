@@ -14,9 +14,11 @@
 - Profile
 
 #### Patron
+- Dashboard
 - Request a Book
 
 #### Librarian
+- Dashboard
 - View Patrons
 - View Requests
 
