@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { PatronEditDto } from 'src/app/auth/model/user.model';
 import { FeeModel } from 'src/app/model/fee.model';
 import { Patron } from 'src/app/model/patron.model';
 import { FeeService } from 'src/app/service/fee.service';
@@ -19,13 +20,15 @@ export class LibfeeComponent implements OnInit {
   fee: FeeModel;
   patrons: Patron[];
   selectedPatron: Patron;
+  patronToEdit: PatronEditDto;
   patronNames: string[];
 
   emptyFee: boolean;
   showEdit: boolean;
   showAdd: boolean;
   showAddForm: boolean;
-  balance: number;
+  showBalance: boolean;
+  balance: string;
   editIndex: number;
 
   selectedOption: string;
@@ -37,6 +40,8 @@ export class LibfeeComponent implements OnInit {
     this.showEdit = false;
     this.showAdd = false;
     this.showAddForm = false;
+    this.showBalance = false;
+    this.balance = '0';
     this.fetchPatrons();
   }
 
@@ -66,11 +71,13 @@ export class LibfeeComponent implements OnInit {
     this.fetchFeesByPatron(this.selectedOption);
     this.showAdd = true;
     this.showAddForm = false;
+    this.showBalance = true;
     this.patrons.forEach(p => {
       if(p.username === this.selectedOption) {
         this.selectedPatron = p;
       }
     })
+    this.balance = this.selectedPatron.balance.toString();
   }
 
   editClicked(index: number) {
@@ -111,10 +118,25 @@ export class LibfeeComponent implements OnInit {
 
   onAddSubmit() {
     this.showAddForm = false;
+    this.patronToEdit = new PatronEditDto;
     this.fee = new FeeModel;
     this.fee.feeType = this.addForm.value.type;
     this.fee.total = this.addForm.value.amount;
     this.fee.patronName = this.selectedPatron.name;
+    let balance = eval(this.selectedPatron.balance.toString());
+    balance += eval(this.fee.total.toString());
+    this.balance = balance;
+    this.patronToEdit.balance = eval(this.balance);
+    this.selectedPatron.balance = eval(this.balance);
+    this.patronToEdit.id = this.selectedPatron.id;
+    this.patronToEdit.name = this.selectedPatron.name;
+    this.patronToEdit.cardexpirationdate = this.selectedPatron.cardexpirationdate;
+    this.patronToEdit.username = this.selectedPatron.username;
+    this.patronService.putPatron(this.patronToEdit).subscribe({
+      next: (data) => {
+
+      }
+    })
     this.feeService.postFee(this.selectedPatron.id, this.fee).subscribe({
       next: (data)=> {
         if(this.emptyFee == true) {
@@ -129,6 +151,5 @@ export class LibfeeComponent implements OnInit {
         console.log(e);
       }
     })
-
   }
 }

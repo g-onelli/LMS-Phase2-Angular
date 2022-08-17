@@ -26,7 +26,8 @@
                                                         </option>
                                                     </select> &nbsp;&nbsp;
                                                     <button (click)="select()">Select</button> &nbsp;&nbsp;
-                                                    <button *ngIf="showAdd" (click)="addFee()">Add Fee</button>
+                                                    <button *ngIf="showAdd" (click)="addFee()">Add Fee</button>&nbsp;&nbsp;
+                                                    <span *ngIf="showBalance">Balance: ${{balance}}</span>
                                                 </div>
                                             </div>
                                             <div class="box-listagem__item" *ngFor="let f of fees, let i = index">

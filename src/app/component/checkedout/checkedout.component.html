@@ -1,63 +1,5 @@
 
-<div class = 'leftSection'>
-    <br />
 
-    <div class = 'check-out-item'>
-        <form (submit)="checkOutFormSubmit()" [formGroup]="checkOutForm">
-            <label>Enter Item ID: </label>
-            <input type="text" name="itemId" formControlName="itemId">
-            <span *ngIf="checkOutForm.controls['itemId'].invalid
-            && checkOutForm.controls['itemId'].touched">
-              <span *ngIf="checkOutForm.controls['itemId'].errors['required']"> Item ID is Required</span>
-              <span *ngIf="checkOutForm.controls['itemId'].errors['pattern']"> Item ID must be an integer number</span>
-            </span>
-            <br />
-            <br />
-            <label>Select Item Type:</label>
-            &nbsp;
-            <select name="iType" id="iType" formControlName="iType">
-                <option value="book">Book</option>
-                <option value="video">Video</option>
-            </select>
-            <br />
-            <br />
-            <input type="submit" value="Checkout" [disabled]="!checkOutForm.valid">
-        </form>
-    </div>
-    
-    <br />
-</div>
-
-
-
-<div class = rightSection>
-    <br />
-
-    <div class = 'check-in-item'>
-        <form (submit)="checkInFormSubmit()" [formGroup]="checkInForm">
-            <label>Enter Item ID: </label>
-            <input type="text" name="itemId" formControlName="itemId">
-            <span *ngIf="checkInForm.controls['itemId'].invalid
-            && checkInForm.controls['itemId'].touched">
-              <span *ngIf="checkInForm.controls['itemId'].errors['required']"> Item ID is Required</span>
-              <span *ngIf="checkInForm.controls['itemId'].errors['pattern']"> Item ID must be a decimal number</span>
-            </span>
-            <br />
-            <br />
-            <label>Select Item Type:</label>
-            &nbsp;
-            <select name="iType" id="iType" formControlName="iType">
-                <option value="book">Book</option>
-                <option value="video">Video</option>
-            </select>
-            &nbsp;
-            <br />
-            <br />
-            <input type="submit" value="Check-in" [disabled]="!checkInForm.valid">
-        </form>
-    </div>
-    <br />
-</div>
 
 <div id="conteudo-secao">
     
@@ -124,7 +66,7 @@
                     <div class="conteudo-secao-box">
                         <div class="topo-secao">
                             <div class="topo-secao__inner">
-                                <span class="topo-secao__txt">Checked Out Books</span>
+                                <span class="topo-secao__txt">Your Checked Out Books</span>
                             </div>
                         </div>
                         <div class="body-secao">
@@ -133,7 +75,7 @@
                                     <div class="box-listagem__item">
                                         <div class="box-listagem__inner">
                                             <div class="box_listagem__field">
-                                                <app-checkedoutbook></app-checkedoutbook>
+                                                <app-checkedoutbook (deleteCheckedOutBookEmitter) = "onCheckedInBookPut()" (postCheckedOutBookEmitter) = "onCheckedOutBookPut()"></app-checkedoutbook>
                                             </div>
                                         </div>
                                     </div>
@@ -148,7 +90,7 @@
                     <div class="conteudo-secao-box">
                         <div class="topo-secao">
                             <div class="topo-secao__inner">
-                                <span class="topo-secao__txt">Checked Out Videos</span>
+                                <span class="topo-secao__txt">Your Checked Out Videos</span>
                             </div>
                         </div>
                         <div class="body-secao">
@@ -157,7 +99,7 @@
                                     <div class="box-listagem__item">
                                         <div class="box-listagem__inner">
                                             <div class="box_listagem__field">
-                                                <app-checkedoutvideo></app-checkedoutvideo>
+                                                <app-checkedoutvideo (deleteCheckedOutVideoEmitter) = "onCheckedInVideosPut()" (postCheckedOutVideoEmitter) = "onCheckedOutVideosPut()"></app-checkedoutvideo>
                                         </div>
                                     </div>
                                 </div>
@@ -169,6 +111,68 @@
          </tr>
      </tbody>
  </table>
+</div>
+
+<div class = 'leftSection'>
+    <br />
+
+    <div class = 'check-out-item'>
+        <form (submit)="checkOutFormSubmit()" [formGroup]="checkOutForm">
+            <label>Enter Item ID: </label>
+            <input type="text" name="itemId" formControlName="itemId">
+            <span *ngIf="checkOutForm.controls['itemId'].invalid
+            && checkOutForm.controls['itemId'].touched">
+              <span *ngIf="checkOutForm.controls['itemId'].errors['required']"> Item ID is Required</span>
+              <span *ngIf="checkOutForm.controls['itemId'].errors['pattern']"> Item ID must be an integer number</span>
+            </span>
+            <br />
+            <br />
+            <label>Select Item Type:</label>
+            &nbsp;
+            <select name="iType" id="iType" formControlName="iType">
+                <option value="book">Book</option>
+                <option value="video">Video</option>
+            </select>
+            <br />
+            <br />
+            <input type="submit" value="Checkout" [disabled]="!checkOutForm.valid">
+            {{checkoutMessage}}
+        </form>
+    </div>
+    
+    <br />
+</div>
+
+
+
+<div class = rightSection>
+    <br />
+
+    <div class = 'check-in-item'>
+        <form (submit)="checkInFormSubmit()" [formGroup]="checkInForm">
+            <label>Enter Item ID: </label>
+            <input type="text" name="itemId" formControlName="itemId">
+            <span *ngIf="checkInForm.controls['itemId'].invalid
+            && checkInForm.controls['itemId'].touched">
+              <span *ngIf="checkInForm.controls['itemId'].errors['required']"> Item ID is Required</span>
+              <span *ngIf="checkInForm.controls['itemId'].errors['pattern']"> Item ID must be a decimal number</span>
+            </span>
+            <br />
+            <br />
+            <label>Select Item Type:</label>
+            &nbsp;
+            <select name="iType" id="iType" formControlName="iType">
+                <option value="book">Book</option>
+                <option value="video">Video</option>
+            </select>
+            &nbsp;
+            <br />
+            <br />
+            <input type="submit" value="Check-in" [disabled]="!checkInForm.valid">
+            {{checkinMessage}}
+        </form>
+    </div>
+    <br />
 </div>
 
 
