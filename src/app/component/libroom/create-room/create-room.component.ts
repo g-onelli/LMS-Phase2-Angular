@@ -16,26 +16,26 @@ export class CreateRoomComponent implements OnInit {
   constructor(private roomservice:RoomService) { }
 
   ngOnInit(): void {
+    this.message="";
     this.addRoomForm = new FormGroup({
-      rNum: new FormControl("",[Validators.required,Validators.pattern(/[0-9]{3}/)]),
-      cap: new FormControl("",[Validators.required,Validators.pattern(/[0-9]{2}/)]),
-      pt: new FormControl("",[Validators.required,Validators.pattern(/[0-9]{1}/)])
+      rNum: new FormControl("",[Validators.required,Validators.pattern(/[0-9]/)]),
+      cap: new FormControl("",[Validators.required,Validators.pattern(/[0-9]/)]),
+      pt: new FormControl("",[Validators.required,Validators.pattern(/[0-9]/)])
     }
-    )
-
-    
+    );
   }
 
   addRoomFunc(){
+    console.log(this.addRoomForm.value.rNum)
     this.roomObj={
       roomNumber:this.addRoomForm.value.rNum,
       capacity: this.addRoomForm.value.cap,
       hasPresenterTools: this.addRoomForm.value.pt
-    }
-
+    };
+    console.log(this.roomObj);
     this.roomservice.addRoomCollection(this.roomObj).subscribe({
       next: (data)=>{
-        this.message = "The room"+ this.addRoomForm.value.rNum +"has been added."
+        this.message = "The room has been added to the room collection."
         console.log(this.message);
       },
       error: (err)=>{
@@ -43,5 +43,11 @@ export class CreateRoomComponent implements OnInit {
         console.log(this.message);
       }
     });
+    this.resetAll();
+  }
+
+  resetAll(){
+    this.addRoomForm.reset();
+    this.message="";
   }
 }

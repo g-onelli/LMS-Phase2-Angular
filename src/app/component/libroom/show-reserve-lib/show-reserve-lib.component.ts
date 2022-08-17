@@ -26,11 +26,4 @@ export class ShowReserveLibComponent implements OnInit {
     });
   }
 
-  showReserves(){
-    console.log();
-    
-
-
-  }
-
 }
