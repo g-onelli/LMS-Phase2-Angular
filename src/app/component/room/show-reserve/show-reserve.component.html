@@ -1,4 +1,4 @@
-<form (submit)="showReserve()" [formGroup]="formOne">
+<!--<form (submit)="showReserve()" [formGroup]="formOne">
     <label>Patron Id</label>
     <input type="text" name="pid" formControlName="pid">
     <input type="submit" value="show reservations">
@@ -18,20 +18,25 @@
     </div>
 </div>
 
+<div class="headerGO" *ngIf="bool==true">
+    <span >{{message}}</span>
+    <button (click)="emptyMsg()">OK</button>
+</div>
+-->
 <form class="box-listagem__item" (submit)="showReserve()" [formGroup]="formOne">
     <div class="box-listagem__inner">
         <br>
         <div class="headerGO">
             
-            <h3>Check For Open Rooms By Date</h3>
+            <h3>Check Open Reservation</h3>
         </div>
         <br>
     <div class="field">
-    <span class="field--title">Input A Reservation Date: </span>
+    <span class="field--title">Input Your Patron Id: </span>
     <div class="simple-input">
         <div class="bordered">
           <div class="simple-input--inner">
-    <input class="simple-input" type="date" name="date"  formControlName="date">
+    <input class="simple-input" type="number" name="pid" formControlName="pid">
 </div>
 </div>
 </div>
@@ -50,22 +55,27 @@
     <div class="box-listagem__inner">
         <br>
         <div class="headerGO"> 
-            <h3>Check For Open Rooms By Date</h3>
+            <h3>All Personal, Open Reservation</h3>
         </div>
 <br>
         <div >
-            <div class="listGO" *ngFor="let r of roomList">
-                Room: {{r.roomNumber}}
+            <div class="listGO" *ngFor="let r of reservations">
+                Room Number: {{r.roomNumber}}
                 &nbsp;
-                Accomodation Capacity: {{r.capacity}}
+                Date: {{r.reservedDate}}
                 &nbsp;
-                Number of Presentation Tools: {{r.hasPresenterTools}}
+                Time: {{r.startTime}}
+                &nbsp;
+                Duration: {{r.duration}}
+                &nbsp;
+                Capacity: {{r.capacity}}
             </div>
             <br>
             <br>
         </div>
     </div>
 </div>
+    <br>
     <br>
     <br>
     

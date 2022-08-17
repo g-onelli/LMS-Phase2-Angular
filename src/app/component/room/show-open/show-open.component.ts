@@ -14,6 +14,7 @@ export class ShowOpenComponent implements OnInit {
 
   //Storage Objects
   roomList: room[];
+  message: string;
 
 
   constructor(private roomService: RoomService) { 
@@ -38,11 +39,14 @@ export class ShowOpenComponent implements OnInit {
     let strTime = convertTime.toString();
     console.log(typeof strDate);
     this.roomService.getOpenRooms(strDate,
-      strTime).subscribe(data=> {
-      this.roomList = data;
-      console.log(this.roomList);
-      console.log(this.roomList!=[]);
-    })
-  }
-
+      strTime).subscribe({
+        next: (data)=>{
+          this.roomList=data;
+        },
+        error: (err)=>{
+          this.message = "There are no open rooms at the time."
+          console.log(this.message);
+        }
+      });
+    }
 }

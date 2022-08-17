@@ -7,11 +7,13 @@ import { RoomService } from 'src/app/service/room.service';
 @Component({
   selector: 'app-show-reserve',
   templateUrl: './show-reserve.component.html',
-  styleUrls: ['./show-reserve.component.css']
+  styleUrls: ['./show-reserve.component.less']
 })
 export class ShowReserveComponent implements OnInit {
   formOne: FormGroup;
   reservations:checkedoutroom[];
+  message: string;
+  bool:boolean;
 
   constructor(private roomService:RoomService) { }
 
@@ -26,8 +28,12 @@ export class ShowReserveComponent implements OnInit {
     this.roomService.showReservations(this.formOne.value.pid).subscribe(data=>{
       this.reservations=data;
     });
+  }
 
-
+  emptyMsg(){
+    this.message = "";
+    this.bool=false;
+    window.location.reload();
   }
 
 }
