@@ -18,6 +18,7 @@ export class ChangeReserveComponent implements OnInit {
   constructor(private roomService:RoomService) { }
 
   ngOnInit(): void {
+    this.message="";
     this.changeResForm=new FormGroup(
       {
         rNum: new FormControl("",[Validators.required,Validators.pattern(/[0-9]+/)]),

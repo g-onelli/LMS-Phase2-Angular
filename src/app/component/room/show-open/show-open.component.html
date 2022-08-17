@@ -48,7 +48,7 @@
             <h3>All Open Library Rooms</h3>
         </div>
 <br>
-        <div >
+    <div *ngIf="(roomList !=[])">
             <div class="listGO" *ngFor="let r of roomList">
                 Room: {{r.roomNumber}}
                 &nbsp;
@@ -57,8 +57,9 @@
                 Number of Presentation Tools: {{r.hasPresenterTools}}
             </div>
             <br>
+            <button *ngIf="!(message=='')" class="myButton" (click)="resetAll()">OK</button>
             <br>
-            <button *ngIf="roomList==[]" class="myButton" (click)="resetAll()">OK</button>
+            
         </div>
     </div>
 </div>
