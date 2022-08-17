@@ -23,9 +23,11 @@ export class DeleteRoomComponent implements OnInit {
     this.roomservice.deleteRoom(this.deleteForm.value.rNum).subscribe({
       next: (data)=>{
         this.message = "The room"+ this.deleteForm.value.rNum +"has been deleted."
+        console.log(this.message);
       },
       error: (err)=>{
         this.message = "The system was not able to delete the room."
+        console.log(this.message);
       }
     });
   }

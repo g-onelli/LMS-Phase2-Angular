@@ -36,9 +36,11 @@ export class CreateRoomComponent implements OnInit {
     this.roomservice.addRoomCollection(this.roomObj).subscribe({
       next: (data)=>{
         this.message = "The room"+ this.addRoomForm.value.rNum +"has been added."
+        console.log(this.message);
       },
       error: (err)=>{
         this.message = "The system was not able to add the room."
+        console.log(this.message);
       }
     });
   }

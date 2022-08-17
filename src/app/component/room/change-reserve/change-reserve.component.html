@@ -1,0 +1,40 @@
+<form (submit)="changeReserve()" [formGroup]="changeResForm" class="form">
+    <label>Room Number Of Original Reservation</label>
+    <br>
+    <input type="text" name="rNum" formControlName="rNum">
+    <br>
+    <br>
+    <label>Update to Be Done to Reservation</label>
+    <br>
+    <input type="text" name="changeValue" formControlName="changeValue"> 
+    <br>
+    <br>
+    <span>Please fill out the below fields based on their
+        applicability to your reservation change being made.
+    </span>
+    <br>
+    <br>
+    <label>New Room Number</label>
+    <br>
+    <input type="text" name="nNum" formControlName="nNum">
+    <br>
+    <br>
+    <label>New Reservation Date</label>
+    <br>
+    <input type="date" name="sDate" formControlName="sDate">
+    <br>
+    <br>
+    <label>New Reservation Time (hh:mm)</label>
+    <br>
+    <input type="text" name="strTime" formControlName="strTime">
+    <br>
+    <br>
+    <label>New Length of Reservation (hr)</label>
+    <br>
+    <input type="text" name="durT" formControlName="durT">
+    <br>
+    <br>
+    <input type="submit" value="submit reservation changes">
+    <!--change the update slot to radio buttons-->
+
+</form>

@@ -1,0 +1,14 @@
+<form (submit)="deleteReserve()" [formGroup]="deleteReserveForm">
+    <label>Room Number</label>
+    <br>
+    <input type="text" name="rNum" formControlName="rNum">
+    <br>
+    <br>
+    <label>Date of Reservation</label>
+    <br>
+    <input type="date" name="sDate" formControlName="sDate">
+    <br>
+    <br>
+    <input type="submit" value="delete reservation">
+
+</form>

@@ -7,7 +7,7 @@ import { RoomService } from 'src/app/service/room.service';
 @Component({
   selector: 'app-show-open',
   templateUrl: './show-open.component.html',
-  styleUrls: ['./show-open.component.css']
+  styleUrls: ['./show-open.component.less']
 })
 export class ShowOpenComponent implements OnInit {
   checkDateForm: FormGroup;
@@ -31,13 +31,14 @@ export class ShowOpenComponent implements OnInit {
   }
 
   newRoomData(){
-    console.log(this.checkDateForm.value.date);
-    let convert = this.checkDateForm.value.date;
-    console.log(this.checkDateForm.value.time);
-    let strDate = convert.toString();
+
+    let convertDate = this.checkDateForm.value.date;
+    let convertTime = this.checkDateForm.value.time;
+    let strDate = convertDate.toString();
+    let strTime = convertTime.toString();
     console.log(typeof strDate);
     this.roomService.getOpenRooms(strDate,
-      this.checkDateForm.value.time).subscribe(data=> {
+      strTime).subscribe(data=> {
       this.roomList = data;
       console.log(this.roomList);
       console.log(this.roomList!=[]);

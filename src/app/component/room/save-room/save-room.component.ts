@@ -6,7 +6,7 @@ import { RoomService } from 'src/app/service/room.service';
 @Component({
   selector: 'app-save-room',
   templateUrl: './save-room.component.html',
-  styleUrls: ['./save-room.component.css']
+  styleUrls: ['./save-room.component.less']
 })
 export class SaveRoomComponent implements OnInit {
   saveRoomForm:FormGroup;
