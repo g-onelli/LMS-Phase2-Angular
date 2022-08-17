@@ -1,4 +1,4 @@
-<form (submit)="newRoomData()" [formGroup]="checkDateForm">
+<!--<form (submit)="newRoomData()" [formGroup]="checkDateForm">
     <span>
         When are you looking to reserve a room?
     </span>
@@ -17,16 +17,70 @@
     <br>
     <br>
     <input type="submit" value="submit time"> 
+</form>-->
+
+<form class="box-listagem__item" (submit)="newRoomData()" [formGroup]="checkDateForm">
+    <div class="box-listagem__inner">
+        <br>
+        <div class="headerGO">
+            
+            <h3>Check For Open Rooms By Date</h3>
+        </div>
+        <br>
+    <div class="field">
+    <span class="field--title">Input A Reservation Date: </span>
+    <div class="simple-input">
+        <div class="bordered">
+          <div class="simple-input--inner">
+    <input class="simple-input" type="date" name="date"  formControlName="date">
+</div>
+</div>
+</div>
+</div>
+    <span *ngIf="checkDateForm.controls['date'].invalid && checkDateForm.controls['date'].touched">
+        <span *ngIf="checkDateForm.controls['date'].errors['required']"> Title is Required</span>
+        </span>
+    <br /><br />
+    <div class="field">
+    <span class="field--title">Input A Reservation Time: </span>
+    <div class="simple-input">
+        <div class="bordered">
+          <div class="simple-input--inner">
+    <input class="simple-input" type="time" name="time" formControlName="time">
+</div>
+</div>
+</div>
+</div>
+    <span *ngIf="checkDateForm.controls['time'].invalid && checkDateForm.controls['time'].touched">
+        <span *ngIf="checkDateForm.controls['time'].errors['pattern']">Alphabetical characters only</span>
+        <span *ngIf="checkDateForm.controls['time'].errors['required']"> Author is Required</span>
+        </span>
+    <br /><br />
+    <input class="myButton" type="submit" value="Submit Request" [disabled]="!checkDateForm.valid">
+    <br /><br />
+</div>
 </form>
 
-    <br>
-    <br>
-    <div *ngIf="roomList!=[]">
-        <div *ngFor="let r of roomList">
-            Room: {{r.roomNumber}}
-            &nbsp;
-            Accomodation Capacity: {{r.capacity}}
-            &nbsp;
-            Number of Presentation Tools: {{r.hasPresenterTools}}
+<div class="box-listagem__item" >
+    <div class="box-listagem__inner">
+        <br>
+        <div class="headerGO"> 
+            <h3>Check For Open Rooms By Date</h3>
+        </div>
+<br>
+        <div >
+            <div class="listGO" *ngFor="let r of roomList">
+                Room: {{r.roomNumber}}
+                &nbsp;
+                Accomodation Capacity: {{r.capacity}}
+                &nbsp;
+                Number of Presentation Tools: {{r.hasPresenterTools}}
+            </div>
+            <br>
+            <br>
         </div>
     </div>
+</div>
+    <br>
+    <br>
+    
