@@ -15,10 +15,6 @@ export class ShowReserveLibComponent implements OnInit {
   constructor(private roomService:RoomService) { }
 
   ngOnInit(): void {
-  }
-
-  showReserves(){
-    console.log();
     this.roomService.showAllReservations().subscribe({
       next: (data)=>{
         this.reservations = data;
@@ -28,6 +24,11 @@ export class ShowReserveLibComponent implements OnInit {
         console.log(this.message);
       }
     });
+  }
+
+  showReserves(){
+    console.log();
+    
 
 
   }
