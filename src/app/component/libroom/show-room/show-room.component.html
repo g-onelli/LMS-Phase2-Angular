@@ -1,13 +1,70 @@
-<button (click)="showAllRooms()"></button>
-
+<!--<button (click)="showAllRooms()"></button>-->
+<div class="box-listagem__item" >
+    <div class="box-listagem__inner">
+        <br>
+        <div class="headerGO"> 
+            <h3>All Reservations Currently Booked</h3>
+        </div>
 <br>
-<br>
-<div *ngIf="roomList!=[]">
-    <div *ngFor="let r of roomList">
-        Room: {{r.roomNumber}}
-        &nbsp;
-        Accomodation Capacity: {{r.capacity}}
-        &nbsp;
-        Number of Presentation Tools: {{r.hasPresenterTools}}
+        <div >
+            <!--<div class="listGO" *ngFor="let r of roomList">
+                Room: {{r.roomNumber}}
+                &nbsp;
+                Accomodation Capacity: {{r.capacity}}
+                &nbsp;
+                Number of Presentation Tools: {{r.hasPresenterTools}}
+            </div>-->
+            <app-show-reserve-lib></app-show-reserve-lib>
+            <br>
+            <br>
+        </div>
     </div>
 </div>
+
+<form class="box-listagem__item" (submit)="showSingleRoom()" [formGroup]="showOneRoomForm">
+    <div class="box-listagem__inner">
+
+    <br>
+    <div class="headerGO">
+        
+        <h3>Show Single Room</h3>
+    </div>
+    <br>
+    <div class="field">
+    <span class="field--title">Input Room Number: </span>
+    <div class="simple-input">
+        <div class="bordered">
+          <div class="simple-input--inner">
+    <input class="simple-input"  type="number" name="rNum" formControlName="rNum">
+</div>
+</div>
+</div>
+</div>
+    <span *ngIf="showOneRoomForm.controls['rNum'].invalid && showOneRoomForm.controls['rNum'].touched">
+        <span *ngIf="showOneRoomForm.controls['rNum'].errors['required']"> The Room Number is Required</span>
+        </span>
+
+    <input class="myButton" type="submit" value="Show Room" [disabled]="!showOneRoomForm.valid">
+    <br /><br />
+    <div *ngIf="!(message =='')">
+        <span >{{message}} </span><br />
+        <button class="myButton" (click)="resetAll()">OK</button>
+    </div>
+    
+    
+    <div class="nightClass" *ngIf="room!=null">
+        <br>
+        <div class="headerGO">
+           
+            <h3>Show Room {{room.roomNumber}}</h3>
+        </div>
+        <br>
+        Room: {{room.roomNumber}}
+        &nbsp;
+        Accomodation Capacity: {{room.capacity}}
+        &nbsp;
+        Number of Presentation Tools: {{room.hasPresenterTools}}
+</div>
+<br>
+</div>
+</form>

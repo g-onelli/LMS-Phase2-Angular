@@ -10,19 +10,20 @@ import { RoomService } from 'src/app/service/room.service';
 })
 export class ShowReserveLibComponent implements OnInit {
   reservations:checkedoutroom[];
+  message: string;
 
   constructor(private roomService:RoomService) { }
 
   ngOnInit(): void {
-  }
-
-  showReserves(){
-    console.log();
-    this.roomService.showAllReservations().subscribe(data=>{
-      this.reservations=data;
+    this.roomService.showAllReservations().subscribe({
+      next: (data)=>{
+        this.reservations = data;
+      },
+      error: (err)=>{
+        this.message = "The system was not able to show the rooms."
+        console.log(this.message);
+      }
     });
-
-
   }
 
 }

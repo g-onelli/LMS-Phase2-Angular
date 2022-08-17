@@ -1,1 +1,66 @@
-<p>create-room works!</p>
+<br>
+
+<br>
+<form class="box-listagem__item" (submit)="addRoomFunc()" [formGroup]="addRoomForm">
+    <div class="box-listagem__inner">
+    <br>
+    <div class="headerGO" *ngIf="(message =='')">
+        
+        <h3>Adding Room to Database</h3>
+    </div>
+    <div class="headerGO" *ngIf="!(message =='')">
+        <span >
+            <h2>{{message}}</h2>
+        </span><br />
+        <button class="myButton" (click)="resetAll()"> OK</button>
+    </div>
+    <br>
+    <div class="field">
+    <span class="field--title">Enter Room Number: </span>
+    <div class="simple-input">
+        <div class="bordered">
+          <div class="simple-input--inner">
+    <input class="simple-input"  type="number" name="rNum" formControlName="rNum">
+</div>
+</div>
+</div>
+</div>
+    <span *ngIf="addRoomForm.controls['rNum'].invalid && addRoomForm.controls['rNum'].touched">
+        <span *ngIf="addRoomForm.controls['rNum'].errors['required']"> The Room Number is Required</span>
+        </span>
+        <!-- <span *ngIf="addRoomForm.controls['rNum'].errors['pattern']">This must be a reasonable number</span> -->
+    <br /><br />
+    <div class="field">
+    <span class="field--title">Enter How Many People can be in the Room: </span>
+    <div class="simple-input">
+        <div class="bordered">
+          <div class="simple-input--inner">
+    <input class="simple-input" type="number" name="cap" formControlName="cap"> 
+</div>
+</div>
+</div>
+</div>
+    <span *ngIf="addRoomForm.controls['cap'].invalid && addRoomForm.controls['cap'].touched">
+        <!-- <span *ngIf="addRoomForm.controls['cap'].errors['pattern']">This must be a reasonable number</span> -->
+        <span *ngIf="addRoomForm.controls['cap'].errors['required']"> You must input the room's capacity</span>
+        </span>
+    <br /><br />
+    <div class="field">
+        <span class="field--title">Enter the Number of Presenter Tools Present: </span>
+        <div class="simple-input">
+            <div class="bordered">
+              <div class="simple-input--inner">
+    <input class="simple-input" type="number" name="pt" formControlName="pt">
+</div>
+</div>
+</div>
+</div>
+    <span *ngIf="addRoomForm.controls['pt'].invalid && addRoomForm.controls['pt'].touched">
+        <!-- //<span *ngIf="addRoomForm.controls['pt'].errors['pattern']">This must be a reasonable number</span> -->
+        <span *ngIf="addRoomForm.controls['pt'].errors['required']"> You must input the room's number of presenter tools</span>
+        </span>
+        <br /><br />
+    <input class="myButton" type="submit" value="Add Room" [disabled]="!addRoomForm.valid">
+    <br /><br />
+</div>
+</form>

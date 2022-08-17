@@ -1,0 +1,121 @@
+<!--<form (submit)="changeReserve()" [formGroup]="changeResForm" class="form">
+    <label>Room Number Of Original Reservation</label>
+    <br>
+    <input type="text" name="rNum" formControlName="rNum">
+    <br>
+    <br>
+    <label>Update to Be Done to Reservation</label>
+    <br>
+    <input type="text" name="changeValue" formControlName="changeValue"> 
+    <br>
+    <br>
+    <span>Please fill out the below fields based on their
+        applicability to your reservation change being made.
+    </span>
+    <br>
+    <br>
+    <label>New Room Number</label>
+    <br>
+    <input type="text" name="nNum" formControlName="nNum">
+    <br>
+    <br>
+    <label>New Reservation Date</label>
+    <br>
+    <input type="date" name="sDate" formControlName="sDate">
+    <br>
+    <br>
+
+    <label>New Length of Reservation (hr)</label>
+    <br>
+    <input type="text" name="durT" formControlName="durT">
+    <br>
+    <br>
+    <input type="submit" value="submit reservation changes">
+
+
+</form>
+-->
+<form class="box-listagem__item" (submit)="changeReserve()" [formGroup]="changeResForm">
+    <div class="box-listagem__inner">
+    <span *ngIf="!(message =='')">{{message}}</span><br />
+    <br>
+    <div class="headerGO">
+        
+        <h3>Editing Current Reservations</h3>
+    </div>
+    <br>
+    <div class="field">
+    <span class="field--title">Input Room Number of Current Reservation: </span>
+    <div class="simple-input">
+        <div class="bordered">
+          <div class="simple-input--inner">
+    <input class="simple-input"  type="number" name="rNum" formControlName="rNum">
+</div>
+</div>
+</div>
+</div>
+    <span *ngIf="changeResForm.controls['rNum'].invalid && changeResForm.controls['rNum'].touched">
+        <span *ngIf="changeResForm.controls['rNum'].errors['required']"> The Original Room Number is Required</span>
+        </span>
+    <br /><br />
+    <div class="field">
+    <span class="field--title">Update Field: </span>
+    <span class="field--title">(This will determine what is updated in the reservation: either date, length, or room) </span>
+    <div class="simple-input">
+        <div class="bordered">
+          <div class="simple-input--inner">
+    <input class="simple-input" type="text" name="changeValue" formControlName="changeValue"> 
+</div>
+</div>
+</div>
+</div>
+    <span *ngIf="changeResForm.controls['changeValue'].invalid && changeResForm.controls['changeValue'].touched">
+        <span *ngIf="changeResForm.controls['changeValue'].errors['pattern']">The options are date, length, or room</span>
+        <span *ngIf="changeResForm.controls['changeValue'].errors['required']"> You must choose either date, length, or room</span>
+        </span>
+    <br /><br />
+    <div class="field">
+        <span class="field--title">New Date: </span>
+        <div class="simple-input">
+            <div class="bordered">
+              <div class="simple-input--inner">
+    <input class="simple-input" type="date" name="sDate" formControlName="sDate">
+</div>
+</div> <!--type="number" name="duration" formControlName="duration"-->
+</div>
+</div>
+    <span *ngIf="changeResForm.controls['sDate'].invalid && changeResForm.controls['sDate'].touched">
+        </span>
+        <br /><br />
+    <div class="field">
+            <span class="field--title">New Room Number: </span>
+            <div class="simple-input">
+                <div class="bordered">
+                  <div class="simple-input--inner">
+    <input class="simple-input" type="number" name="nNum" formControlName="nNum">
+    </div>
+    </div>
+    </div>
+    </div>
+        <span *ngIf="changeResForm.controls['nNum'].invalid && changeResForm.controls['nNum'].touched">
+            <span *ngIf="changeResForm.controls['nNum'].errors['pattern']">You need to input a new room number to change it</span>
+            </span>
+        <br /><br />
+    <div class="field">
+            <span class="field--title">New Duration: </span>
+            <div class="simple-input">
+                <div class="bordered">
+                  <div class="simple-input--inner">
+    <input class="simple-input" type="number" name="durT" formControlName="durT">
+    </div>
+    </div>
+    </div>
+    </div>
+        <span *ngIf="changeResForm.controls['durT'].invalid && changeResForm.controls['durT'].touched">
+        <span *ngIf="changeResForm.controls['nNum'].errors['pattern']">You need to input a new room number to change it</span>
+            </span>
+        <br /><br />
+    <input class="myButton" type="submit" value="Update Reservation" [disabled]="!changeResForm.valid">
+    <br /><br />
+</div>
+</form>

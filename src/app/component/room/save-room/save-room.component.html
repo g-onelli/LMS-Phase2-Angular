@@ -1,24 +1,109 @@
-
+<!--
 <form (submit)="saveRoom()" [formGroup]="saveRoomForm">
     <label>Patron ID</label>
-    <input type="number" name="pid" formGroupName="pid">
+    <input type="number" name="pid" formControlName="pid">
     <br>
     <br>
     <label>Room Number</label>
-    <input type="number" name="rNum" formGroupName="rNum">
+    <input type="number" name="rNum" formControlName="rNum">
     <br>
     <br>
     <label>Date</label>
-    <input type="date" name="strDate" formGroupName="strDate">
+    <input type="date" name="strDate" formControlName="strDate">
     <br>
     <br>
     <label>Time</label>
-    <input type="string" name="time" formGroupName="time">
+    <input type="string" name="time" formControlName="time">
     <br>
     <br>
     <label>Duration</label>
-    <input type="number" name="duration" formGroupName="duration">
+    <input type="number" name="duration" formControlName="duration">
     <br>
     <br>
     <input type="submit" value="Make Reservation">
+</form>-->
+
+<form class="box-listagem__item" (submit)="saveRoom()" [formGroup]="saveRoomForm">
+    <div class="box-listagem__inner">
+    <span *ngIf="!(message =='')">{{message}}</span><br />
+    <br>
+    <div class="headerGO">
+        
+        <h3>Submit A Room Reservation</h3>
+    </div>
+    <br>
+    <div class="field">
+    <span class="field--title">Input Patron Id: </span>
+    <span class="field--title">(Found on the back of your library card)</span>
+
+    <div class="simple-input">
+        <div class="bordered">
+          <div class="simple-input--inner">
+    <input class="simple-input" type="number" name="pid" formControlName="pid">
+</div>
+</div>
+</div>
+</div>
+    <span *ngIf="saveRoomForm.controls['pid'].invalid && saveRoomForm.controls['pid'].touched">
+        <span *ngIf="saveRoomForm.controls['pid'].errors['required']"> Your Patron Id is Required</span>
+        </span>
+    <br /><br />
+    <div class="field">
+    <span class="field--title">State the Room You Want to Reserve: </span>
+    <div class="simple-input">
+        <div class="bordered">
+          <div class="simple-input--inner">
+    <input class="simple-input" type="number" name="rNum" formControlName="rNum">
+</div>
+</div>
+</div>
+</div>
+    <span *ngIf="saveRoomForm.controls['rNum'].invalid && saveRoomForm.controls['rNum'].touched">
+        <span *ngIf="saveRoomForm.controls['rNum'].errors['pattern']">Please Only Room Numbers</span>
+        <span *ngIf="saveRoomForm.controls['rNum'].errors['required']"> A Room Number is Required</span>
+        </span>
+    <br /><br />
+    <div class="field">
+        <span class="field--title">When do You Want to Reserve the Room: </span>
+        <div class="simple-input">
+            <div class="bordered">
+              <div class="simple-input--inner">
+    <input class="simple-input" type="date" name="strDate" formControlName="strDate">
+</div>
+</div> <!--type="number" name="duration" formControlName="duration"-->
+</div>
+</div>
+    <span *ngIf="saveRoomForm.controls['strDate'].invalid && saveRoomForm.controls['strDate'].touched">
+        </span>
+        <br /><br />
+    <div class="field">
+            <span class="field--title">What Time Would You Like to Reserve: </span>
+            <div class="simple-input">
+                <div class="bordered">
+                  <div class="simple-input--inner">
+    <input class="simple-input" type="time" name="time" formControlName="time">
+    </div>
+    </div>
+    </div>
+    </div>
+        <span *ngIf="saveRoomForm.controls['duration'].invalid && saveRoomForm.controls['duration'].touched">
+            </span>
+        <br /><br />
+    <div class="field">
+            <span class="field--title">How Long Would You Like to Reserve the Room: </span>
+            <span class="field--title">(Maximum individual reservation can last 5 hours) </span>
+            <div class="simple-input">
+                <div class="bordered">
+                  <div class="simple-input--inner">
+    <input class="simple-input" type="number" name="duration" formControlName="duration">
+    </div>
+    </div>
+    </div>
+    </div>
+        <span *ngIf="saveRoomForm.controls['duration'].invalid && saveRoomForm.controls['duration'].touched">
+            </span>
+        <br /><br />
+    <input class="myButton" type="submit" value="Submit Reservation" [disabled]="!saveRoomForm.valid">
+    <br /><br />
+</div>
 </form>

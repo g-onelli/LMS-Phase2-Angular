@@ -60,6 +60,9 @@ import { ShowRoomComponent } from './component/libroom/show-room/show-room.compo
 import { ShowReserveLibComponent } from './component/libroom/show-reserve-lib/show-reserve-lib.component';
 import { CreateRoomComponent } from './component/libroom/create-room/create-room.component';
 import { DeleteRoomComponent } from './component/libroom/delete-room/delete-room.component';
+import { ChangeReserveComponent } from './component/room/change-reserve/change-reserve.component';
+import { DeleteReserveComponent } from './component/room/delete-reserve/delete-reserve.component';
+
 
 
 
@@ -115,6 +118,8 @@ import { DeleteRoomComponent } from './component/libroom/delete-room/delete-room
     ShowReserveLibComponent,
     CreateRoomComponent,
     DeleteRoomComponent,
+    ChangeReserveComponent,
+    DeleteReserveComponent,
   ],
   imports: [
     BrowserModule,
