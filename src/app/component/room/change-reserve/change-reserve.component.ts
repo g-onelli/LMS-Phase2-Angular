@@ -8,12 +8,13 @@ import { RoomService } from 'src/app/service/room.service';
 @Component({
   selector: 'app-change-reserve',
   templateUrl: './change-reserve.component.html',
-  styleUrls: ['./change-reserve.component.css']
+  styleUrls: ['./change-reserve.component.less']
 })
 export class ChangeReserveComponent implements OnInit {
   changeResForm:FormGroup;
   check:reservation;
   updateObj:updateModel;
+  message: string;
   constructor(private roomService:RoomService) { }
 
   ngOnInit(): void {
@@ -29,6 +30,11 @@ export class ChangeReserveComponent implements OnInit {
     )
   }
 
+  resetAll(){
+    this.changeResForm.reset();
+    this.message="";
+  }
+
   changeReserve(){
     switch(this.changeResForm.value.changeValue){
       case "date":{
@@ -37,9 +43,16 @@ export class ChangeReserveComponent implements OnInit {
           strDate:this.changeResForm.value.sDate,
           intValue:0
         }
-        this.roomService.updateResDate(this.updateObj).subscribe(data=>{
-          this.check=data;
+        this.roomService.updateResDate(this.updateObj).subscribe({
+          next: (data)=>{
+            this.message="Your reservation has been updated";
+          },
+          error: (err)=>{
+            this.message = "The system was unable to update the reservation."
+            console.log(this.message);
+          }
         });
+
         break;
       }
       case "room":{
@@ -48,8 +61,14 @@ export class ChangeReserveComponent implements OnInit {
           strDate:"",
           intValue:this.changeResForm.value.nNum
         }
-        this.roomService.updateResRoom(this.updateObj).subscribe(data=>{
-          this.check=data;
+        this.roomService.updateResRoom(this.updateObj).subscribe({
+          next: (data)=>{
+            this.message="Your reservation has been updated";
+          },
+          error: (err)=>{
+            this.message = "The system was unable to update the reservation."
+            console.log(this.message);
+          }
         });
         break;
       }
@@ -59,15 +78,22 @@ export class ChangeReserveComponent implements OnInit {
           strDate:"",
           intValue:this.changeResForm.value.durT
         }
-        this.roomService.updateResDuration(this.updateObj).subscribe(data=>{
-          this.check=data;
+        this.roomService.updateResDuration(this.updateObj).subscribe({
+          next: (data)=>{
+            this.message="Your reservation has been updated";
+          },
+          error: (err)=>{
+            this.message = "The system was unable to update the reservation."
+            console.log(this.message);
+          }
         });
         break;
       }
       default:{
-        console.log("The case did not match anything");
+        this.message = "The system was unable to update the reservation. Please check the change field.";
         break;
       }
+      this.resetAll();
     }
   }
 }
