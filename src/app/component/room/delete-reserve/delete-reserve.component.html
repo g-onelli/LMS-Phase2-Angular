@@ -15,12 +15,21 @@
 
 <form class="box-listagem__item" (submit)="deleteReserve()" [formGroup]="deleteReserveForm">
     <div class="box-listagem__inner">
-    <span *ngIf="!(message =='')">{{message}}</span><br />
+    <div class="headerGo" *ngIf="!(message =='')">
+        <span >{{message}}</span><br />
+
     <br>
-    <div class="headerGO">
+
+        <button *ngIf="!(message =='')" class="myButton" (click)="resetAll()">OK</button>
+    </div>
+    
+    <div class="headerGO" *ngIf="(message =='')">
         
         <h3>Cancel A Reservation</h3>
     </div>
+   
+    
+
     <br>
     <div class="field">
     <span class="field--title">Input Room Number of Current Reservation: </span>
@@ -46,12 +55,12 @@
 </div>
 </div>
 </div>
-    <span *ngIf="deleteReserveForm.controls['changeValue'].invalid && deleteReserveForm.controls['changeValue'].touched">
+  <!--   <span *ngIf="deleteReserveForm.controls['changeValue'].invalid && deleteReserveForm.controls['changeValue'].touched">
         <span *ngIf="deleteReserveForm.controls['changeValue'].errors['pattern']">The options are date, length, or room</span>
         <span *ngIf="deleteReserveForm.controls['changeValue'].errors['required']"> You must choose either date, length, or room</span>
-        </span>
+        </span> -->
     <br /><br />
-    <input class="myButton" type="submit" value="Delete Reservation" [disabled]="!deleteReserveForm.valid">
+    <input class="myButton" type="submit" value="Delete Reservation" >
     <br /><br />
 </div>
 </form>

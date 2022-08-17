@@ -15,6 +15,7 @@ export class DeleteReserveComponent implements OnInit {
   constructor(private roomservice:RoomService) { }
 
   ngOnInit(): void {
+    this.message='';
     this.deleteReserveForm = new FormGroup({
       rNum: new FormControl("",[Validators.required,Validators.pattern(/[0-9]+/)]),
       sDate:new FormControl("",Validators.required)

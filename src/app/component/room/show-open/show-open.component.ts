@@ -22,6 +22,8 @@ export class ShowOpenComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.roomList = [];
+    this.message="";
     this.checkDateForm = new FormGroup({
       date: new FormControl("",[Validators.required]),
       time: new FormControl("",
@@ -42,6 +44,7 @@ export class ShowOpenComponent implements OnInit {
       strTime).subscribe({
         next: (data)=>{
           this.roomList=data;
+          console.log(this.roomList);
         },
         error: (err)=>{
           this.message = "There are no open rooms at the time."
