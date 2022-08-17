@@ -6,15 +6,17 @@ import { RoomService } from 'src/app/service/room.service';
 @Component({
   selector: 'app-show-room',
   templateUrl: './show-room.component.html',
-  styleUrls: ['./show-room.component.css']
+  styleUrls: ['./show-room.component.less']
 })
 export class ShowRoomComponent implements OnInit {
   roomList:room[];
   room:room;
   showOneRoomForm:FormGroup;
+  message: string;
   constructor(private roomServices:RoomService) { }
 
   ngOnInit(): void {
+    this.message="";
     this.showOneRoomForm=new FormGroup({
       rNum: new FormControl("",Validators.required)}
     );
@@ -26,12 +28,21 @@ export class ShowRoomComponent implements OnInit {
 
   showSingleRoom(){
     console.log(this.showOneRoomForm.value.rNum);
-    this.roomServices.showOneRoom(this.showOneRoomForm.value.rNum).subscribe(data=>{
-      console.log(data);
-      this.room = data;
-      
-    })
-    console.log(this.room);
+    this.roomServices.showOneRoom(this.showOneRoomForm.value.rNum).subscribe({
+      next: (data)=>{
+        this.room=data;
+      },
+      error: (err)=>{
+        this.message = "The system was unable to find this room."
+        console.log(this.message);
+      }
+    });
+    this.resetAll();
+  }
+
+  resetAll(){
+    this.showOneRoomForm.reset();
+    this.message="";
   }
 
 }

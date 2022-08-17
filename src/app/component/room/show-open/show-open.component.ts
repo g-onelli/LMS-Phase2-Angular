@@ -49,4 +49,10 @@ export class ShowOpenComponent implements OnInit {
         }
       });
     }
+
+    resetAll(){
+      this.checkDateForm.reset();
+      this.roomList = [];
+      this.message="";
+    }
 }

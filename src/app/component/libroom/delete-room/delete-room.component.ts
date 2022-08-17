@@ -31,4 +31,9 @@ export class DeleteRoomComponent implements OnInit {
       }
     });
   }
+
+  resetAll(){
+    this.deleteForm.reset();
+    this.message="";
+  }
 }
