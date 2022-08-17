@@ -77,9 +77,10 @@ export class CheckedoutvideoComponent implements OnInit {
       next: (data) => {
         this.checkedOutVideos = data
         this.postCheckedOutVideoEmitter.emit(vId);
+        this.errorMessage = '';
       },
       error: (e) => {
-        this.errorMessage = "ID does not exist in available books list";
+        this.errorMessage = "ID does not exist in list of available books";
       }
     })
   }
@@ -89,9 +90,10 @@ export class CheckedoutvideoComponent implements OnInit {
       next: (data) => {
         this.checkedOutVideos = data;
         this.deleteCheckedOutVideoEmitter.emit(id);
+        this.errorMessage = '';
       },
       error: (e) => {
-        this.errorMessage = "ID does not exist in list of checked out videos!!!";
+        this.errorMessage = "ID does not exist in list of checked out videos";
       }
     });
   }

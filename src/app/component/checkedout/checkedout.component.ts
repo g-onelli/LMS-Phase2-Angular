@@ -126,16 +126,14 @@ export class CheckedoutComponent implements OnInit {
    this.checkedOutVideoComponent.checkOutVideo(pId, vId);
   }
   checkInBook(id: number) {
+    this.checkinMessage = this.checkedOutBookComponent.errorMessage;
     this.checkedOutBookComponent.checkInBook(id);
-    if(this.checkedOutBookComponent.errorMessage = "throw"){
-      this.checkinMessage = "ID is not listed in your checked out books! "
-    }
+   
   }
   checkInVideo(id: number) {
+    this.checkinMessage = this.checkedOutVideoComponent.errorMessage;
     this.checkedOutVideoComponent.checkInVideo(id);
-    if(this.checkedOutBookComponent.errorMessage = "throw"){
-      this.checkinMessage = "ID is not listed in your checked out videos! "
-    }
+   
   }
 
   onCheckedInBookPut(){

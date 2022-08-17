@@ -5,9 +5,16 @@
 ### Gabriela
 #### Patron
 - Room Reservations
+- View open rooms
+- edit reservations
+- cancel reservations
+- see reservations for specific patron
 
 #### Librarian
 - View Rooms
+- delete rooms
+- add rooms
+- see currently active reservations
 
 ### Gavin
 - Login/Signup/Reset Password
