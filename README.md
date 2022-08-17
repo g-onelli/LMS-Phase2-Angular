@@ -11,10 +11,10 @@
 
 ### Gavin
 - Login/Signup/Reset Password
-- Profile
 
 #### Patron
 - Dashboard
+- Profile
 - Request a Book
 
 #### Librarian
