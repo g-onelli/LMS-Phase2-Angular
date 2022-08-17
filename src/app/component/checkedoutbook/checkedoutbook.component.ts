@@ -73,9 +73,10 @@ export class CheckedoutbookComponent implements OnInit {
       next: (data) => {
         this.checkedOutBooks = data;
         this.postCheckedOutBookEmitter.emit(bId);
+        this.errorMessage = '';
       },
       error: (e) => {
-        this.errorMessage = "throw"
+        this.errorMessage = "ID does not exist in list of available books"
       }
     })
   }
@@ -85,9 +86,10 @@ export class CheckedoutbookComponent implements OnInit {
       next: (data) => {
         this.checkedOutBooks = data;
         this.deleteCheckedOutBookEmitter.emit(id);
+        this.errorMessage = '';
       },
       error: (e) => {
-        this.errorMessage = "throw"
+        this.errorMessage = "ID does not exist in list of checked out books"
       }
     });
   }
