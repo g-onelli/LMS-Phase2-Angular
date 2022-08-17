@@ -17,3 +17,56 @@
         Capacity: {{r.capacity}}
     </div>
 </div>
+
+<form class="box-listagem__item" (submit)="showReserve()" [formGroup]="formOne">
+    <div class="box-listagem__inner">
+        <br>
+        <div class="headerGO">
+            
+            <h3>Check For Open Rooms By Date</h3>
+        </div>
+        <br>
+    <div class="field">
+    <span class="field--title">Input A Reservation Date: </span>
+    <div class="simple-input">
+        <div class="bordered">
+          <div class="simple-input--inner">
+    <input class="simple-input" type="date" name="date"  formControlName="date">
+</div>
+</div>
+</div>
+</div>
+    <span *ngIf="formOne.controls['pid'].invalid && formOne.controls['pid'].touched">
+        <span *ngIf="formOne.controls['pid'].errors['required']"> Your Patron Id is Required</span>
+        </span>
+ 
+    <br /><br />
+    <input class="myButton" type="submit" value="Submit Request" [disabled]="!formOne.valid">
+    <br /><br />
+</div>
+</form>
+
+<div class="box-listagem__item" >
+    <div class="box-listagem__inner">
+        <br>
+        <div class="headerGO"> 
+            <h3>Check For Open Rooms By Date</h3>
+        </div>
+<br>
+        <div >
+            <div class="listGO" *ngFor="let r of roomList">
+                Room: {{r.roomNumber}}
+                &nbsp;
+                Accomodation Capacity: {{r.capacity}}
+                &nbsp;
+                Number of Presentation Tools: {{r.hasPresenterTools}}
+            </div>
+            <br>
+            <br>
+        </div>
+    </div>
+</div>
+    <br>
+    <br>
+    
+

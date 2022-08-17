@@ -141,7 +141,7 @@ Librarian:
     return this.http.get<room>(this.getARoomAPI+rNum,httpOptions);
   }
 
-  public makeReservation(reserveRoom: reservation):Observable<reservation>{
+  public makeReservation(reserveRoom: reservation):Observable<any>{
     console.log("We are at service.makeReservation");
     //Credentials for API Calls
     let encodedCredentials = localStorage.getItem('credentials');
@@ -153,10 +153,10 @@ Librarian:
     };
     console.log(this.makeReserveAPI);
     console.log(reserveRoom);
-    return this.http.post<reservation>(this.makeReserveAPI,reserveRoom,httpOptions);
+    return this.http.post<any>(this.makeReserveAPI,reserveRoom,httpOptions);
   }
 
-  public addRoomCollection(roomObj:room):Observable<room>{
+  public addRoomCollection(roomObj:room):Observable<any>{
     console.log("We got in service.addRoom");
     let encodedCredentials = localStorage.getItem('credentials');
     let httpOptions = {
@@ -165,10 +165,10 @@ Librarian:
         'Authorization': 'basic ' + encodedCredentials
       })
     };
-    return this.http.post<room>(this.addRoomAPI,roomObj,httpOptions);
+    return this.http.post<any>(this.addRoomAPI,roomObj,httpOptions);
   }
 
-  public updateResPatron(pid:string,rNum:string):Observable<reservation>{
+  public updateResPatron(pid:string,rNum:string):Observable<any>{
     console.log("We got in service.updateResPatron");
     let encodedCredentials = localStorage.getItem('credentials');
     let httpOptions = {
@@ -177,10 +177,10 @@ Librarian:
         'Authorization': 'basic ' + encodedCredentials
       })
     }; 
-    return this.http.put<reservation>(this.updatePatronAPI+"?pid="+pid+"&rNum="+rNum,httpOptions);
+    return this.http.put<any>(this.updatePatronAPI+"?pid="+pid+"&rNum="+rNum,httpOptions);
   }
 
-  public updateResDate(obj:updateModel):Observable<reservation>{
+  public updateResDate(obj:updateModel):Observable<any>{
     console.log("We got in service.updateResDate");
     let encodedCredentials = localStorage.getItem('credentials');
     let httpOptions = {
@@ -189,10 +189,10 @@ Librarian:
         'Authorization': 'basic ' + encodedCredentials
       })
     };
-    return this.http.put<reservation>(this.updateDateAPI,obj,httpOptions);
+    return this.http.put<any>(this.updateDateAPI,obj,httpOptions);
   }
 
-  public updateResRoom(obj:updateModel):Observable<reservation>{
+  public updateResRoom(obj:updateModel):Observable<any>{
     console.log("We got in service.updateresroom");
     let encodedCredentials = localStorage.getItem('credentials');
     let httpOptions = {
@@ -201,10 +201,10 @@ Librarian:
         'Authorization': 'basic ' + encodedCredentials
       })
     };
-    return this.http.put<reservation>(this.updateRoomAPI,obj,httpOptions);
+    return this.http.put<any>(this.updateRoomAPI,obj,httpOptions);
   }
 
-  public updateResDuration(obj:updateModel):Observable<reservation>{
+  public updateResDuration(obj:updateModel):Observable<any>{
     console.log("We got in service.updateresduration");
     let encodedCredentials = localStorage.getItem('credentials');
     let httpOptions = {
@@ -213,10 +213,10 @@ Librarian:
         'Authorization': 'basic ' + encodedCredentials
       })
     };
-    return this.http.put<reservation>(this.updateDurationAPI,obj,httpOptions);
+    return this.http.put<any>(this.updateDurationAPI,obj,httpOptions);
   }
 
-  public editOldRoom(rNum:string,roomObj:room):Observable<room>{
+  public editOldRoom(rNum:string,roomObj:room):Observable<any>{
     console.log("We got in service.editoldroom");
     let encodedCredentials = localStorage.getItem('credentials');
     let httpOptions = {
@@ -225,10 +225,10 @@ Librarian:
         'Authorization': 'basic ' + encodedCredentials
       })
     };
-    return this.http.put<room>(this.editRoomAPI+rNum,roomObj,httpOptions);
+    return this.http.put<any>(this.editRoomAPI+rNum,roomObj,httpOptions);
   }
 
-  public deleteReservation(rNum:string,sDate:string):Observable<reservation>{
+  public deleteReservation(rNum:string,sDate:string):Observable<any>{
     console.log("We got in service.deletereservation");
     let encodedCredentials = localStorage.getItem('credentials');
     let httpOptions = {
@@ -238,7 +238,7 @@ Librarian:
       })
     };
     console.log(this.deleteReserveAPI+"?rNum="+rNum+"&strDate="+sDate);
-    return this.http.delete<reservation>(this.deleteReserveAPI+"?rNum="+rNum+"&strDate="+sDate,httpOptions);
+    return this.http.delete<any>(this.deleteReserveAPI+"?rNum="+rNum+"&strDate="+sDate,httpOptions);
   }
 
   public deleteRoom(rNum:string):Observable<reservation>{

@@ -25,7 +25,7 @@
 
 <form class="box-listagem__item" (submit)="saveRoom()" [formGroup]="saveRoomForm">
     <div class="box-listagem__inner">
-    <!--<span *ngIf="!(message =='')">{{message}}</span><br />-->
+    <span *ngIf="!(message =='')">{{message}}</span><br />
     <br>
     <div class="headerGO">
         
@@ -45,7 +45,7 @@
 </div>
 </div>
     <span *ngIf="saveRoomForm.controls['pid'].invalid && saveRoomForm.controls['pid'].touched">
-        <span *ngIf="saveRoomForm.controls['pid'].errors['required']"> pid is Required</span>
+        <span *ngIf="saveRoomForm.controls['pid'].errors['required']"> Your Patron Id is Required</span>
         </span>
     <br /><br />
     <div class="field">
@@ -59,8 +59,8 @@
 </div>
 </div>
     <span *ngIf="saveRoomForm.controls['rNum'].invalid && saveRoomForm.controls['rNum'].touched">
-        <span *ngIf="saveRoomForm.controls['rNum'].errors['pattern']">Alphabetical characters only</span>
-        <span *ngIf="saveRoomForm.controls['rNum'].errors['required']"> Author is Required</span>
+        <span *ngIf="saveRoomForm.controls['rNum'].errors['pattern']">Please Only Room Numbers</span>
+        <span *ngIf="saveRoomForm.controls['rNum'].errors['required']"> A Room Number is Required</span>
         </span>
     <br /><br />
     <div class="field">

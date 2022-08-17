@@ -12,6 +12,7 @@ export class SaveRoomComponent implements OnInit {
   saveRoomForm:FormGroup;
   reserveObj: reservation;
   check:reservation;
+  message:string;
   
   constructor(private roomservice:RoomService) { }
 
@@ -25,6 +26,11 @@ export class SaveRoomComponent implements OnInit {
     })
   }
 
+  resetAll(){
+    this.saveRoomForm.reset();
+    this.message="";
+  }
+
   saveRoom():void{
     console.log(this.saveRoomForm.value.time);
     this.reserveObj={
@@ -35,10 +41,18 @@ export class SaveRoomComponent implements OnInit {
       strDate: this.saveRoomForm.value.strDate
     }
     console.log(this.reserveObj);
-    this.roomservice.makeReservation(this.reserveObj).subscribe(data=>{
-      this.check=data;
+    this.roomservice.makeReservation(this.reserveObj).subscribe({
+      next: (data)=>{
+        this.message = "The room has been reserved.";
+        console.log(this.message);
+      },
+      error: (err)=>{
+        this.message = "The system was not able to reserve the room."
+        console.log(this.message);
+      }
     });
-    console.log("We have sent the submission");
+    
+    this.resetAll();
   }
 
 }
