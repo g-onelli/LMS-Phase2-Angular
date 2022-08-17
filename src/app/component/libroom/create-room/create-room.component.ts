@@ -6,7 +6,7 @@ import { RoomService } from 'src/app/service/room.service';
 @Component({
   selector: 'app-create-room',
   templateUrl: './create-room.component.html',
-  styleUrls: ['./create-room.component.css']
+  styleUrls: ['./create-room.component.less']
 })
 export class CreateRoomComponent implements OnInit {
   addRoomForm:FormGroup;
@@ -17,9 +17,9 @@ export class CreateRoomComponent implements OnInit {
 
   ngOnInit(): void {
     this.addRoomForm = new FormGroup({
-      rNum: new FormControl("",[Validators.required,Validators.pattern('\d{3}')]),
-      cap: new FormControl("",[Validators.required,Validators.pattern('\d{2}')]),
-      pt: new FormControl("",[Validators.required,Validators.pattern('\d{1}')])
+      rNum: new FormControl("",[Validators.required,Validators.pattern(/[0-9]{3}/)]),
+      cap: new FormControl("",[Validators.required,Validators.pattern(/[0-9]{2}/)]),
+      pt: new FormControl("",[Validators.required,Validators.pattern(/[0-9]{1}/)])
     }
     )
 

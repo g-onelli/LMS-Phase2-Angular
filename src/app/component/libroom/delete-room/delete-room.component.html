@@ -1,9 +1,4 @@
-<form (submit)="deleteRoomFunc()" [formGroup]="deleteForm">
-    <label>Room Number</label>
-    <input type="number" name="rNum" formControlName="rNum">
-    <input type="submit" value="delete room">
 
-</form>
 
 <form class="box-listagem__item" (submit)="deleteRoomFunc()" [formGroup]="deleteForm">
     <div class="box-listagem__inner">
@@ -28,7 +23,7 @@
         <span *ngIf="deleteForm.controls['rNum'].errors['required']"> The Room Number is Required</span>
         </span>
 
-    <input class="myButton" type="submit" value="Show Room" [disabled]="!deleteForm.valid">
+    <input class="myButton" type="submit" value="Delete Room" [disabled]="!deleteForm.valid">
     <br /><br />
     <div *ngIf="!(message =='')">
         <span >{{message}} </span><br />

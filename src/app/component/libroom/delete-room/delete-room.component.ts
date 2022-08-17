@@ -5,7 +5,7 @@ import { RoomService } from 'src/app/service/room.service';
 @Component({
   selector: 'app-delete-room',
   templateUrl: './delete-room.component.html',
-  styleUrls: ['./delete-room.component.css']
+  styleUrls: ['./delete-room.component.less']
 })
 export class DeleteRoomComponent implements OnInit {
   deleteForm:FormGroup;
@@ -14,6 +14,7 @@ export class DeleteRoomComponent implements OnInit {
   constructor(private roomservice:RoomService) { }
 
   ngOnInit(): void {
+    this.message="";
     this.deleteForm=new FormGroup({
       rNum: new FormControl("",[Validators.required,Validators.pattern('\d{3}')])
     })
