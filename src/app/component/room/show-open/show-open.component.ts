@@ -7,13 +7,14 @@ import { RoomService } from 'src/app/service/room.service';
 @Component({
   selector: 'app-show-open',
   templateUrl: './show-open.component.html',
-  styleUrls: ['./show-open.component.css']
+  styleUrls: ['./show-open.component.less']
 })
 export class ShowOpenComponent implements OnInit {
   checkDateForm: FormGroup;
 
   //Storage Objects
   roomList: room[];
+  message: string;
 
 
   constructor(private roomService: RoomService) { 
@@ -21,6 +22,8 @@ export class ShowOpenComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.roomList = [];
+    this.message="";
     this.checkDateForm = new FormGroup({
       date: new FormControl("",[Validators.required]),
       time: new FormControl("",
@@ -31,17 +34,28 @@ export class ShowOpenComponent implements OnInit {
   }
 
   newRoomData(){
-    console.log(this.checkDateForm.value.date);
-    let convert = this.checkDateForm.value.date;
-    console.log(this.checkDateForm.value.time);
-    let strDate = convert.toString();
+
+    let convertDate = this.checkDateForm.value.date;
+    let convertTime = this.checkDateForm.value.time;
+    let strDate = convertDate.toString();
+    let strTime = convertTime.toString();
     console.log(typeof strDate);
     this.roomService.getOpenRooms(strDate,
-      this.checkDateForm.value.time).subscribe(data=> {
-      this.roomList = data;
-      console.log(this.roomList);
-      console.log(this.roomList!=[]);
-    })
-  }
+      strTime).subscribe({
+        next: (data)=>{
+          this.roomList=data;
+          console.log(this.roomList);
+        },
+        error: (err)=>{
+          this.message = "There are no open rooms at the time."
+          console.log(this.message);
+        }
+      });
+    }
 
+    resetAll(){
+      this.checkDateForm.reset();
+      this.roomList = [];
+      this.message="";
+    }
 }

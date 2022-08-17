@@ -1,15 +1,16 @@
-<button (click)="showReserves()"></button>
+<!-- <button (click)="showReserves()">Show Reservations</button> -->
 
 <div *ngIf="reservations!=[]">
-    <div *ngFor="let r of reservations">
-        Room Number: {{r.roomNumber}}
-        &nbsp;
-        Date: {{r.reservedDate}}
-        &nbsp;
-        Time: {{r.startTime}}
-        &nbsp;
-        Duration: {{r.duration}}
-        &nbsp;
-        Capacity: {{r.capacity}}
+    <div class="prettyFormat">
+        <div *ngFor="let r of reservations">
+            Room Number: {{r.roomNumber}}
+            &nbsp;
+            Date: {{r.reservedDate}}
+            &nbsp;
+            Patron: {{r.patronName}}
+            &nbsp;
+            Patron Id: {{r.patronId}}
+        </div>
+        <br>
     </div>
 </div>

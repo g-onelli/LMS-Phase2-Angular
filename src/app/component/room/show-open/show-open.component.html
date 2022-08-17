@@ -1,32 +1,68 @@
-<form (submit)="newRoomData()" [formGroup]="checkDateForm">
-    <span>
-        When are you looking to reserve a room?
-    </span>
-    <br>
-    <br>
-    <label> 
-        The date: 
-    </label>
-    <input type="date" name="date"  formControlName="date" >
-    <br>
-    <br>
-    <label>
-        The time 
-    </label>
-    <input type="text" name="time"  formControlName="time"><br>
-    <br>
-    <br>
-    <input type="submit" value="submit time"> 
+
+<form class="box-listagem__item" (submit)="newRoomData()" [formGroup]="checkDateForm">
+    <div class="box-listagem__inner">
+        <br>
+        <div class="headerGO">
+            
+            <h3>Check For Open Rooms By Date</h3>
+        </div>
+        <br>
+    <div class="field">
+    <span class="field--title">Input A Reservation Date: </span>
+    <div class="simple-input">
+        <div class="bordered">
+          <div class="simple-input--inner">
+    <input class="simple-input" type="date" name="date"  formControlName="date">
+</div>
+</div>
+</div>
+</div>
+    <span *ngIf="checkDateForm.controls['date'].invalid && checkDateForm.controls['date'].touched">
+        <span *ngIf="checkDateForm.controls['date'].errors['required']"> The Date is Required</span>
+        </span>
+    <br /><br />
+    <div class="field">
+    <span class="field--title">Input A Reservation Time: </span>
+    <div class="simple-input">
+        <div class="bordered">
+          <div class="simple-input--inner">
+    <input class="simple-input" type="time" name="time" formControlName="time">
+</div>
+</div>
+</div>
+</div>
+    <span *ngIf="checkDateForm.controls['time'].invalid && checkDateForm.controls['time'].touched">
+        <span *ngIf="checkDateForm.controls['time'].errors['pattern']">Please use the hh:mm format while writing</span>
+        <span *ngIf="checkDateForm.controls['time'].errors['required']"> Time is Required</span>
+        </span>
+    <br /><br />
+    <input class="myButton" type="submit" value="Show Rooms" [disabled]="!checkDateForm.valid">
+    <br /><br />
+</div>
 </form>
 
-    <br>
-    <br>
-    <div *ngIf="roomList!=[]">
-        <div *ngFor="let r of roomList">
-            Room: {{r.roomNumber}}
-            &nbsp;
-            Accomodation Capacity: {{r.capacity}}
-            &nbsp;
-            Number of Presentation Tools: {{r.hasPresenterTools}}
+<div class="box-listagem__item" >
+    <div class="box-listagem__inner">
+        <br>
+        <div class="headerGO"> 
+            <h3>All Open Library Rooms</h3>
+        </div>
+<br>
+    <div *ngIf="(roomList !=[])">
+            <div class="listGO" *ngFor="let r of roomList">
+                Room: {{r.roomNumber}}
+                &nbsp;
+                Accomodation Capacity: {{r.capacity}}
+                &nbsp;
+                Number of Presentation Tools: {{r.hasPresenterTools}}
+            </div>
+            <br>
+            <button *ngIf="!(message=='')" class="myButton" (click)="resetAll()">OK</button>
+            <br>
+            
         </div>
     </div>
+</div>
+    <br>
+    <br>
+    
