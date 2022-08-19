@@ -2,9 +2,12 @@
 
 <form class="box-listagem__item" (submit)="deleteRoomFunc()" [formGroup]="deleteForm">
     <div class="box-listagem__inner">
-
+        <div *ngIf="!(message =='')" class="headerGo">
+            <span >{{message}} </span><br />
+            <button class="myButton" (click)="resetAll()">OK</button>
+        </div>
     <br>
-    <div class="headerGO">
+    <div class="headerGO" *ngIf="(message=='')">
         
         <h3>Delete Room</h3>
     </div>
@@ -25,7 +28,4 @@
 
     <input class="myButton" type="submit" value="Delete Room" [disabled]="!deleteForm.valid">
     <br /><br />
-    <div *ngIf="!(message =='')">
-        <span >{{message}} </span><br />
-        <button class="myButton" (click)="resetAll()">OK</button>
-    </div>
+
