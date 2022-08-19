@@ -26,7 +26,7 @@ export class ChangeReserveComponent implements OnInit {
         nNum:new FormControl("",Validators.pattern(/[0-9]+/)),
         sDate: new FormControl("",),
         strTime:new FormControl("",Validators.pattern(/^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/)),
-        durT:new FormControl("",[Validators.required,Validators.pattern(/[1-5]/)])
+        durT:new FormControl("",Validators.pattern(/[1-5]/))
       }
     )
   }
