@@ -241,7 +241,7 @@ Librarian:
     return this.http.delete<any>(this.deleteReserveAPI+"?rNum="+rNum+"&strDate="+sDate,httpOptions);
   }
 
-  public deleteRoom(rNum:string):Observable<reservation>{
+  public deleteRoom(rNum:number):Observable<reservation>{
     console.log("We got in service.deleteRoom");
     let encodedCredentials = localStorage.getItem('credentials');
     let httpOptions = {

@@ -16,14 +16,14 @@ export class DeleteRoomComponent implements OnInit {
   ngOnInit(): void {
     this.message="";
     this.deleteForm=new FormGroup({
-      rNum: new FormControl("",[Validators.required,Validators.pattern('\d{3}')])
+      rNum: new FormControl("",[Validators.required,Validators.pattern(/[0-9]+/)])
     })
   }
   
   deleteRoomFunc(){
     this.roomservice.deleteRoom(this.deleteForm.value.rNum).subscribe({
       next: (data)=>{
-        this.message = "The room"+ this.deleteForm.value.rNum +"has been deleted."
+        this.message = "Room "+ this.deleteForm.value.rNum +" has been deleted."
         console.log(this.message);
       },
       error: (err)=>{
